@@ -4,7 +4,7 @@
 
 If you discover a security vulnerability in this project, please report it responsibly.
 
-**Email:** _(update with your contact email)_
+**Email:** limyoonaxi@gmail.com
 
 Please include:
 - Description of the vulnerability
