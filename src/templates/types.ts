@@ -9,12 +9,12 @@
  * Content (content/ folder) is shared across all templates.
  */
 
-import type { ThemeOverride } from '@chakra-ui/react'
-import type { ComponentSlots } from './slots'
+import type { ThemeOverride } from "@chakra-ui/react";
+import type { ComponentSlots } from "./slots";
 
 /** Props passed to the template's root layout component */
 export interface LayoutProps {
-  children: React.ReactNode
+  children: React.ReactNode;
 }
 
 /**
@@ -24,13 +24,14 @@ export interface LayoutProps {
  * default "page not available" placeholder.
  */
 export interface TemplatePages {
-  home: React.ComponentType
-  publications?: React.ComponentType
-  projects?: React.ComponentType
-  articles?: React.ComponentType
-  experience?: React.ComponentType
-  guide?: React.ComponentType
-  guideDocs?: React.ComponentType
+  home: React.ComponentType;
+  publications?: React.ComponentType;
+  projects?: React.ComponentType;
+  articles?: React.ComponentType;
+  experience?: React.ComponentType;
+  guide?: React.ComponentType;
+  guideDocs?: React.ComponentType;
+  aboutPage?: React.ComponentType;
 }
 
 /**
@@ -49,17 +50,17 @@ export interface TemplatePages {
  */
 export interface TemplateConfig {
   /** Unique template identifier, e.g. "terminal", "academic", "minimal" */
-  id: string
+  id: string;
   /** Human-readable display name */
-  name: string
+  name: string;
   /** Short description of the template style */
-  description?: string
+  description?: string;
   /** Chakra UI theme override for this template */
-  theme: ThemeOverride
+  theme: ThemeOverride;
   /** Root layout component (nav, footer, etc.) */
-  layout: React.ComponentType<LayoutProps>
+  layout: React.ComponentType<LayoutProps>;
   /** Page components provided by this template */
-  pages: TemplatePages
+  pages: TemplatePages;
   /** Component slot implementations (navbar, hero, footer, etc.) */
-  slots: ComponentSlots
+  slots: ComponentSlots;
 }

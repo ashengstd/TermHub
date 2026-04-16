@@ -53,6 +53,7 @@
     "projects": true,
     "articles": false,
     "experience": true,
+    "about": true,
     "news": false,
     "pets": false,
     "guide": false

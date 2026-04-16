@@ -1,6 +1,7 @@
 {
   "nav": {
     "home": "首页",
+    "about": "关于我",
     "publications": "学术论文",
     "experience": "工作经历",
     "projects": "项目展示",
@@ -14,6 +15,9 @@
     "toggleLanguage": "切换语言"
   },
   "about": {
+    "skills": "技术栈",
+    "aboutDescription": "个人背景、经历与技能",
+    "bio": "关于",
     "recentUpdates": "最新动态",
     "news": "动态",
     "selectedPublications": "精选论文",

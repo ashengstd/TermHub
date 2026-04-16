@@ -1,6 +1,7 @@
 {
   "nav": {
     "home": "Home",
+    "about": "About",
     "publications": "Publications",
     "experience": "Experience",
     "projects": "Projects",
@@ -16,6 +17,9 @@
   "about": {
     "recentUpdates": "Recent Updates",
     "news": "News",
+    "skills": "Skills",
+    "aboutDescription": "Personal background, experience & skills",
+    "bio": "About",
     "selectedPublications": "Selected Publications",
     "viewAllPublications": "View all publications",
     "myJourney": "My Journey",

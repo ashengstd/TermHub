@@ -1,17 +1,20 @@
-import { ChakraProvider } from '@chakra-ui/react'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { siteConfig } from './site.config'
-import { getTemplate, getResolvedSlots, SlotProvider } from './templates'
-import './styles/globals.css'
-import './i18n'
+import { ChakraProvider } from "@chakra-ui/react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { siteConfig } from "./site.config";
+import { getTemplate, getResolvedSlots, SlotProvider } from "./templates";
+import "./styles/globals.css";
+import "./i18n";
 
 function App() {
-  const features = siteConfig.features as Record<string, boolean>
-  const cfg = siteConfig as Record<string, unknown>
-  const template = getTemplate(cfg.template as string | undefined)
-  const slots = getResolvedSlots(template, cfg.components as Record<string, string> | undefined)
+  const features = siteConfig.features as Record<string, boolean>;
+  const cfg = siteConfig as Record<string, unknown>;
+  const template = getTemplate(cfg.template as string | undefined);
+  const slots = getResolvedSlots(
+    template,
+    cfg.components as Record<string, string> | undefined,
+  );
 
-  const { layout: TemplateLayout, pages, theme } = template
+  const { layout: TemplateLayout, pages, theme } = template;
 
   return (
     <ChakraProvider theme={theme}>
@@ -32,6 +35,9 @@ function App() {
               {features.experience && pages.experience && (
                 <Route path="/experience" element={<pages.experience />} />
               )}
+              {features.about && pages.aboutPage && (
+                <Route path="/about" element={<pages.aboutPage />} />
+              )}
               {features.guide !== false && pages.guide && (
                 <Route path="/guide" element={<pages.guide />} />
               )}
@@ -43,7 +49,7 @@ function App() {
         </Router>
       </SlotProvider>
     </ChakraProvider>
-  )
+  );
 }
 
-export default App
+export default App;
