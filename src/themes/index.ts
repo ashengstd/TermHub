@@ -18,6 +18,12 @@
 //  Catppuccin Latte      light-only; uses Frappé as the dark-mode fallback
 //    import { catppuccinoLatteTheme as activeTheme } from './catppuccin'
 //
+//  Ayu Dark              saturated, high contrast (dark) + Ayu Light (light)
+//    import { ayuDarkTheme as activeTheme } from './ayu'
+//
+//  Ayu Mirage            soothing, low contrast (dark) + Ayu Light (light)
+//    import { ayuMirageTheme as activeTheme } from './ayu'
+//
 // ── To add your own theme ────────────────────────────────────────────────────
 //   1. Duplicate `nord.ts` → e.g. `dracula.ts`
 //   2. Replace colour values inside the ThemeDefinition object

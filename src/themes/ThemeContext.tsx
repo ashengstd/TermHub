@@ -6,6 +6,11 @@ import {
   catppuccinoMacchiatoTheme,
   catppuccinoFrappeTheme,
 } from './catppuccin'
+import { ayuDarkTheme, ayuMirageTheme } from './ayu'
+import { draculaTheme } from './dracula'
+import { oneDarkTheme } from './onedark'
+import { everforestTheme } from './everforest'
+import { githubTheme } from './github'
 import type { ThemeDefinition } from './types'
 
 export const themes = {
@@ -13,6 +18,12 @@ export const themes = {
   'catppuccin-mocha': catppuccinoMochaTheme,
   'catppuccin-macchiato': catppuccinoMacchiatoTheme,
   'catppuccin-frappe': catppuccinoFrappeTheme,
+  'ayu-dark': ayuDarkTheme,
+  'ayu-mirage': ayuMirageTheme,
+  dracula: draculaTheme,
+  'one-dark': oneDarkTheme,
+  everforest: everforestTheme,
+  github: githubTheme,
 }
 
 export type ThemeKey = keyof typeof themes
