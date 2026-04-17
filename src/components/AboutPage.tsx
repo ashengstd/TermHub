@@ -13,6 +13,7 @@ import {
   Text,
   VStack,
 } from '@chakra-ui/react'
+import { keyframes } from '@emotion/react'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
@@ -29,6 +30,11 @@ import JourneySection from './sections/JourneySection'
 import MentorshipSection from './sections/MentorshipSection'
 
 /* ── Typewriter Terminal ──────────────────────────────────── */
+
+const termFadeIn = keyframes`
+  from { opacity: 0; transform: translateY(5px); }
+  to   { opacity: 1; transform: translateY(0); }
+`
 
 const TYPING_SPEED = 65
 const DELETING_SPEED = 32
@@ -117,11 +123,7 @@ const TerminalTypewriter: React.FC = () => {
   ]
 
   const fadeIn = (delay: number) => ({
-    '@keyframes termFadeIn': {
-      from: { opacity: 0, transform: 'translateY(5px)' },
-      to: { opacity: 1, transform: 'translateY(0)' },
-    },
-    animation: `termFadeIn 0.4s ease ${delay}s forwards`,
+    animation: `${termFadeIn} 0.4s ease ${delay}s forwards`,
     opacity: 0,
   })
 
