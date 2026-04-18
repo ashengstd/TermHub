@@ -9,10 +9,10 @@ interface MotionListProps {
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
-  visible: (i: number = 0) => ({
+  visible: (i = 0) => ({
     opacity: 1,
     transition: { 
-      delayChildren: i,
+      delayChildren: i as number,
     },
   }),
 }

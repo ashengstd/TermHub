@@ -11,7 +11,7 @@ import {
   VStack,
 } from '@chakra-ui/react'
 import { keyframes } from '@emotion/react'
-import React, { useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { FaChevronDown } from 'react-icons/fa'
 
@@ -106,10 +106,11 @@ const Experience: React.FC = () => {
   const termHighlight = tc.highlight
   const termSuccess = tc.success
   const termSecondary = tc.secondary
-  const hoverBg = isDark ? 'rgba(255,255,255,0.03)' : 'rgba(0,0,0,0.02)'
   const hlc = { kw: termCommand, num: termHighlight, str: termSuccess }
+  const hoverBg = isDark ? 'rgba(255,255,255,0.03)' : 'rgba(0,0,0,0.02)'
 
   useEffect(() => {
+     
     const timer = setInterval(() => {
       setTick((t) => (t + 1) % 1000)
     }, 200)
@@ -134,7 +135,7 @@ const Experience: React.FC = () => {
   const grouped = useMemo(() => {
     const map = new Map<string, typeof filtered>()
     for (const e of filtered) {
-      const key = e.isCurrent ? 'Present' : new Date(e.end!).getFullYear().toString()
+      const key = e.isCurrent ? 'Present' : new Date(e.end ?? '').getFullYear().toString()
       const list = map.get(key) ?? []
       list.push(e)
       map.set(key, list)
@@ -159,13 +160,13 @@ const Experience: React.FC = () => {
   }, [sorted])
 
   const education = experienceData.education.courses
-  const reviewingItems = useMemo(() => experienceData.reviewing ?? [], [experienceData.reviewing])
+  const reviewingItems = useMemo(() => experienceData.reviewing, [experienceData.reviewing])
   const reviewingByYear = useMemo(() => {
     const groups: Record<string, typeof reviewingItems> = {}
     for (const item of reviewingItems) {
-      const m = item.venue.match(/\b(20\d{2})\b/)
+      const m = /\b(20\d{2})\b/.exec(item.venue)
       const y = m ? m[1] : 'Other'
-      if (!groups[y]) groups[y] = []
+      if (!(y in groups)) groups[y] = []
       groups[y].push(item)
     }
     return Object.entries(groups).sort(([a], [b]) => Number(b) - Number(a))
@@ -478,8 +479,8 @@ const Experience: React.FC = () => {
                     </Text>
                     <Text color={termSecondary} fontSize="2xs">
                       {group.year === 'Present'
-                        ? `${group.items.length} ${t('experience.active')}`
-                        : `${group.items.length}`}
+                        ? `${group.items.length.toString()} ${t('experience.active')}`
+                        : group.items.length.toString()}
                     </Text>
                     <Box bg={termBorder} flex="1" h="1px" />
                   </Flex>
@@ -487,7 +488,7 @@ const Experience: React.FC = () => {
                   {/* Entries */}
                   {group.items.map((exp) => {
                     const id = `${exp.title}-${exp.company}-${exp.start}`
-                    const isExpanded = !!expandedItems[id]
+                    const isExpanded = expandedItems[id] ?? false
                     const rt: RoleType =
                       exp.roleType ??
                       (categoryFilter[exp.category] === 'industry' ? 'sde' : 'research')
@@ -689,7 +690,7 @@ const Experience: React.FC = () => {
                       </Text>
                       <HStack flexWrap="wrap" gap={1.5}>
                         {items.map((item, idx) => (
-                          <MotionHover key={`${item.venue}-${idx}`}>
+                          <MotionHover key={`${item.venue}-${idx.toString()}`}>
                             <Text
                               border="1px solid"
                               borderColor={isDark ? 'whiteAlpha.150' : 'blackAlpha.100'}
@@ -746,14 +747,14 @@ const Experience: React.FC = () => {
             <Text color={termPrompt} flexShrink={0} fontFamily="mono" mr={2}>
               $
             </Text>
-            <Input
-              color={termText}
-              flex="1"
-              fontFamily="mono"
-              onChange={(e) => setCommand(e.target.value)}
-              onKeyPress={(e) => {
-                if (e.key === 'Enter') handleCommand(command)
-              }}
+              <Input
+                color={termText}
+                flex="1"
+                fontFamily="mono"
+                onChange={(e) => setCommand(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') handleCommand(command)
+                }}
               placeholder={t('experience.typeHelp')}
               size="xs"
               value={command}

@@ -46,7 +46,7 @@ const rainbow = keyframes`
 `
 
 // Format date to YYYY-MM-DD
-const formatDate = (dateString: string = ''): string => {
+const formatDate = (dateString = '') => {
   if (!dateString) return '0000-00-00'
 
   // Simple conversion for dates like "Jan 2023"
@@ -224,7 +224,8 @@ const NewsTimeline: React.FC<NewsTimelineProps> = ({ news, showHeader: _showHead
   const termSecondary = tc.secondary
 
   // Type colors (for ANSI-like color coding)
-  const typeColors: Record<string, { bg: string; fg: string; icon: string }> = {
+  interface TypeColorEntry { bg: string; fg: string; icon: string }
+  const typeColors: Record<string, TypeColorEntry | undefined> & { default: TypeColorEntry } = {
     course: {
       bg: isDark ? 'rgba(180, 142, 173, 0.15)' : 'rgba(154, 86, 162, 0.1)',
       fg: tc.param,
@@ -262,7 +263,7 @@ const NewsTimeline: React.FC<NewsTimelineProps> = ({ news, showHeader: _showHead
   })
 
   // Status bar: date + scrolling sparkline
-  const bostonDateStr = `${bostonTime.getMonth() + 1}/${bostonTime.getDate()}`
+  const bostonDateStr = `${(bostonTime.getMonth() + 1).toString()}/${bostonTime.getDate().toString()}`
   const sparkChars = '▁▂▃▅▆▇▆▅▃▂▁▃▅▇▅▃'
   const sparkOffset = Math.floor(currentTime.getTime() / 1000) % sparkChars.length
   const sparkDisplay = (sparkChars + sparkChars).slice(sparkOffset, sparkOffset + 8)
@@ -539,7 +540,7 @@ const NewsTimeline: React.FC<NewsTimelineProps> = ({ news, showHeader: _showHead
                 borderRadius="full"
                 h="full"
                 transition="width 0.3s"
-                w={`${memoryUsage}%`}
+                w={`${memoryUsage.toString()}%`}
               />
             </Box>
           </Flex>
@@ -679,9 +680,9 @@ const NewsTimeline: React.FC<NewsTimelineProps> = ({ news, showHeader: _showHead
                   <Flex
                     align="center"
                     as="span"
-                    bg={typeColors[item.type.toLowerCase()]?.bg || typeColors.default.bg}
+                    bg={typeColors[item.type.toLowerCase()]?.bg ?? typeColors.default.bg}
                     borderRadius="sm"
-                    color={typeColors[item.type.toLowerCase()]?.fg || typeColors.default.fg}
+                    color={typeColors[item.type.toLowerCase()]?.fg ?? typeColors.default.fg}
                     display="inline-flex"
                     fontSize={['4xs', '3xs', '2xs']}
                     fontWeight="bold"
@@ -693,7 +694,7 @@ const NewsTimeline: React.FC<NewsTimelineProps> = ({ news, showHeader: _showHead
                     {!isNarrowScreen && (
                       <DynamicIcon
                         boxSize={[2, 2.5]}
-                        name={typeColors[item.type.toLowerCase()]?.icon || typeColors.default.icon}
+                        name={typeColors[item.type.toLowerCase()]?.icon ?? typeColors.default.icon}
                       />
                     )}
                     {getCategoryLength(item.type)}
@@ -714,9 +715,9 @@ const NewsTimeline: React.FC<NewsTimelineProps> = ({ news, showHeader: _showHead
                   <Flex align="center" gap={1}>
                     {item.badge && (
                       <Text
-                        bg={typeColors[item.type.toLowerCase()]?.bg || typeColors.default.bg}
+                        bg={typeColors[item.type.toLowerCase()]?.bg ?? typeColors.default.bg}
                         borderRadius="sm"
-                        color={typeColors[item.type.toLowerCase()]?.fg || typeColors.default.fg}
+                        color={typeColors[item.type.toLowerCase()]?.fg ?? typeColors.default.fg}
                         fontSize={['4xs', '3xs']}
                         fontWeight="bold"
                         px={[0.5, 1]}
@@ -766,7 +767,7 @@ const NewsTimeline: React.FC<NewsTimelineProps> = ({ news, showHeader: _showHead
                             [
                             <DynamicIcon
                               boxSize={[2, 2.5, 3]}
-                              name={link.icon || 'FaExternalLinkAlt'}
+                              name={link.icon ?? 'FaExternalLinkAlt'}
                             />
                             ]
                           </Box>
@@ -800,7 +801,7 @@ const NewsTimeline: React.FC<NewsTimelineProps> = ({ news, showHeader: _showHead
               <Collapsible.Root open={expandedItems[index]}><Collapsible.Content>
                 <Box
                   bg={isDark ? 'rgba(76,86,106,0.1)' : 'rgba(203,213,225,0.15)'}
-                  borderLeft={`2px solid ${typeColors[item.type.toLowerCase()]?.fg || typeColors.default.fg}`}
+                  borderLeft={`2px solid ${typeColors[item.type.toLowerCase()]?.fg ?? typeColors.default.fg}`}
                   pl={[2, 3, 10]}
                   pr={[2, 3]}
                   py={[1.5, 2]}
@@ -808,7 +809,7 @@ const NewsTimeline: React.FC<NewsTimelineProps> = ({ news, showHeader: _showHead
                   <Flex align="start" gap={2} mb={2}>
                     <Box
                       alignItems="center"
-                      bg={typeColors[item.type.toLowerCase()]?.bg || typeColors.default.bg}
+                      bg={typeColors[item.type.toLowerCase()]?.bg ?? typeColors.default.bg}
                       borderRadius="md"
                       display={['none', 'flex']}
                       flexShrink={0}
@@ -818,8 +819,8 @@ const NewsTimeline: React.FC<NewsTimelineProps> = ({ news, showHeader: _showHead
                     >
                       <DynamicIcon
                         boxSize={[3, 4]}
-                        color={typeColors[item.type.toLowerCase()]?.fg || typeColors.default.fg}
-                        name={typeColors[item.type.toLowerCase()]?.icon || typeColors.default.icon}
+                        color={typeColors[item.type.toLowerCase()]?.fg ?? typeColors.default.fg}
+                        name={typeColors[item.type.toLowerCase()]?.icon ?? typeColors.default.icon}
                       />
                     </Box>
                     <Box flex={1} minW={0}>
@@ -828,7 +829,7 @@ const NewsTimeline: React.FC<NewsTimelineProps> = ({ news, showHeader: _showHead
                       </Text>
                       <Flex align="center" flexWrap="wrap" fontSize={['3xs', '2xs']} gap={[1, 2]}>
                         <Text
-                          color={typeColors[item.type.toLowerCase()]?.fg || typeColors.default.fg}
+                          color={typeColors[item.type.toLowerCase()]?.fg ?? typeColors.default.fg}
                           fontWeight="bold"
                           textTransform="uppercase"
                         >
@@ -912,7 +913,7 @@ const NewsTimeline: React.FC<NewsTimelineProps> = ({ news, showHeader: _showHead
                           >
                             <DynamicIcon
                               boxSize={[2, 2.5]}
-                              name={link.icon || 'FaExternalLinkAlt'}
+                              name={link.icon ?? 'FaExternalLinkAlt'}
                             />
                             <Text>
                               {getResponsiveTextLength(

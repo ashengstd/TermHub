@@ -48,7 +48,7 @@ import {
   SiZhihu,
 } from 'react-icons/si'
 
-const icons: { [key: string]: IconType } = {
+const icons: Record<string, IconType> = {
   FaArrowRight,
   FaAward,
   FaBolt,
@@ -103,7 +103,7 @@ interface DynamicIconProps {
 
 const DynamicIcon: React.FC<DynamicIconProps> = ({ name, ...props }) => {
   if (!name) return null
-  const IconComponent = icons[name] || FaCode
+  const IconComponent = (icons as Record<string, React.ComponentType | undefined>)[name] ?? FaCode
   return <Icon as={IconComponent} {...props} />
 }
 

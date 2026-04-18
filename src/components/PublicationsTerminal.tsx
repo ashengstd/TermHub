@@ -89,6 +89,7 @@ const PublicationsTerminal: React.FC = () => {
   const termSuccess = tc.success
   const termWarning = tc.warning
   const termSecondary = tc.secondary
+  const hlc = { kw: termCommand, num: termHighlight, str: termSuccess }
 
   const venueColors = Object.fromEntries(
     Object.entries(publicationVenueColors).map(([k, v]) => [
@@ -452,33 +453,40 @@ const PublicationsTerminal: React.FC = () => {
                       )}
                       <Box flex="1" minW={0} pr={2}>
                         <HStack align="start" flexWrap="wrap" gap={1} mb={1}>
-                          {pub.emoji && emojiIconMap[pub.emoji] && (
+                          {pub.emoji !== undefined && (emojiIconMap as Record<string, React.ComponentType | undefined>)[pub.emoji] !== undefined && (
                             <Icon
                               as={emojiIconMap[pub.emoji]}
-                              color={venueColors[pub.venueType]?.fg}
+                              color={venueColors[pub.venueType].fg}
                               mr={1}
                               mt="3px"
                             />
                           )}
-                          <Text fontWeight="medium" overflowWrap="anywhere" whiteSpace="normal">
-                            {pub.title}
+                          <Text
+                            color={termText}
+                            fontSize={['sm', 'md']}
+                            fontWeight="600"
+                            lineHeight="1.4"
+                          >
+                            {highlightData(pub.title, hlc)}
                           </Text>
                         </HStack>
-                        <HStack flexWrap="wrap" gap={1} mb={1}>
+                        <HStack align="center" flexWrap="wrap" gap={2}>
                           <Badge
-                            bg={venueColors[pub.venueType]?.bg}
-                            color={venueColors[pub.venueType]?.fg}
-                            fontSize="xs"
-                            fontWeight="bold"
-                            overflowWrap="anywhere"
-                            px={2}
-                            py={0.5}
+                            bg={`${venueColors[pub.venueType].bg}20`}
+                            borderColor={venueColors[pub.venueType].fg}
+                            borderRadius="sm"
+                            color={venueColors[pub.venueType].fg}
+                            fontFamily="mono"
+                            fontSize="2xs"
+                            px={1.5}
+                            py={0}
                             textAlign="left"
+                            variant="outline"
                             whiteSpace="normal"
                           >
-                            {pub.venue && String(pub.year) && pub.venue.includes(String(pub.year))
+                            {pub.venue.includes(pub.year.toString())
                               ? pub.venue
-                              : `${pub.venue} ${pub.year}`}
+                              : `${pub.venue} ${pub.year.toString()}`}
                           </Badge>
                           <Badge
                             colorPalette={
@@ -492,7 +500,7 @@ const PublicationsTerminal: React.FC = () => {
                             }
                             fontSize="2xs"
                           >
-                            {venueColors[pub.venueType]?.label}
+                            {venueColors[pub.venueType].label}
                           </Badge>
                           {pub.specialBadges?.map((badge, i) => (
                             <Badge
@@ -563,9 +571,9 @@ const PublicationsTerminal: React.FC = () => {
 
                       <Box display={{ base: "none", md: "block" }} w="150px">
                         <HStack gap={1}>
-                          {pub.links?.paper && <MotionHover><Box title="Paper"><Link href={pub.links.paper} onClick={(e) => e.stopPropagation()} target="_blank"><Badge colorPalette="blue" fontSize="2xs">PDF</Badge></Link></Box></MotionHover>}
-                          {pub.links?.code && <MotionHover><Box title="Code"><Link href={pub.links.code} onClick={(e) => e.stopPropagation()} target="_blank"><Badge colorPalette="green" fontSize="2xs">CODE</Badge></Link></Box></MotionHover>}
-                          {pub.links?.projectPage && <MotionHover><Box title="Project"><Link href={pub.links.projectPage} onClick={(e) => e.stopPropagation()} target="_blank"><Badge colorPalette="purple" fontSize="2xs">PROJ</Badge></Link></Box></MotionHover>}
+                          {pub.links.paper && <MotionHover><Box title="Paper"><Link href={pub.links.paper} onClick={(e) => e.stopPropagation()} target="_blank"><Badge colorPalette="blue" fontSize="2xs">PDF</Badge></Link></Box></MotionHover>}
+                          {pub.links.code && <MotionHover><Box title="Code"><Link href={pub.links.code} onClick={(e) => e.stopPropagation()} target="_blank"><Badge colorPalette="green" fontSize="2xs">CODE</Badge></Link></Box></MotionHover>}
+                          {pub.links.projectPage && <MotionHover><Box title="Project"><Link href={pub.links.projectPage} onClick={(e) => e.stopPropagation()} target="_blank"><Badge colorPalette="purple" fontSize="2xs">PROJ</Badge></Link></Box></MotionHover>}
                         </HStack>
                       </Box>
                       <Text color={expandedItems[pub.id] ? termInfo : termCommand} fontWeight="bold" textAlign="center" w="50px">
@@ -573,9 +581,9 @@ const PublicationsTerminal: React.FC = () => {
                       </Text>
                     </Flex>
 
-                    <Collapsible.Root open={!!expandedItems[pub.id]}>
+                    <Collapsible.Root open={expandedItems[pub.id]}>
                       <Collapsible.Content>
-                        <Box bg={isDark ? 'rgba(76, 86, 106, 0.15)' : 'rgba(203, 213, 225, 0.15)'} borderLeft={`3px solid ${venueColors[pub.venueType]?.fg || termBorder}`} px={8} py={4}>
+                        <Box bg={isDark ? 'rgba(76, 86, 106, 0.15)' : 'rgba(203, 213, 225, 0.15)'} borderLeft={`3px solid ${venueColors[pub.venueType].fg || termBorder}`} px={8} py={4}>
                           <Flex flexDirection={{ base: "column", md: "row" }} gap={4}>
                             <Box flex="1">
                               {pub.Content && (
@@ -595,7 +603,7 @@ const PublicationsTerminal: React.FC = () => {
                                 <Box mb={3}>
                                   <Text color={termInfo} fontSize="xs" mb={1}>── KEYWORDS ─────────────</Text>
                                   <HStack flexWrap="wrap" gap={2}>
-                                    {pub.keywords?.map((k, i) => <Badge colorPalette="cyan" fontSize="2xs" key={i}>{k}</Badge>)}
+                                    {pub.keywords.map((k, i) => <Badge colorPalette="cyan" fontSize="2xs" key={i}>{k}</Badge>)}
                                   </HStack>
                                 </Box>
                               )}
@@ -632,18 +640,27 @@ const PublicationsTerminal: React.FC = () => {
           {/* Footer */}
           <Flex align="center" bg={tc.header} borderTop={`1px solid ${termBorder}`} fontSize="xs" px={4} py={2}>
             <Text color={termPrompt} mr={2}>{siteOwner.terminalUsername}@research:~/papers$</Text>
-            <Input
-              _focus={{ outline: "none" }}
-              border="none"
-              color={termText}
-              flex="1" fontFamily="mono" onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCurrentCommand(e.target.value)} onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => { if (e.key === 'Enter') handleCommand(currentCommand) }} outline="none" placeholder="type 'help' for commands" size="xs" value={currentCommand}
-            />
+              <Input
+                _focus={{ outline: "none" }}
+                border="none"
+                color={termText}
+                flex="1"
+                fontFamily="mono"
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCurrentCommand(e.target.value)}
+                onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
+                  if (e.key === 'Enter') handleCommand(currentCommand)
+                }}
+                outline="none"
+                placeholder="type 'help' for commands"
+                size="xs"
+                value={currentCommand}
+              />
             <Box bg={termPrompt} css={{ animation: `${blink} 1s step-end infinite` }} h="12px" ml={1} w="6px" />
           </Flex>
         </Box>
 
         {imagePreview && (
-          <Dialog.Root onOpenChange={(e) => { if (!e.open) closeImageModal() }} open={!!isImageOpen}>
+          <Dialog.Root onOpenChange={(e) => { if (!e.open) closeImageModal() }} open={isImageOpen}>
             <Dialog.Backdrop bg="rgba(0,0,0,0.8)" />
             <Dialog.Positioner>
               <Dialog.Content bg="transparent" boxShadow="none" p={0}>

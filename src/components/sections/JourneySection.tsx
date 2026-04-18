@@ -69,13 +69,13 @@ const JourneySection: React.FC = () => {
           />
 
           <VStack align="stretch" gap={0}>
-            {about.journeyPhases.map((phase, index) => (
+            {(about.journeyPhases ?? []).map((phase, index) => (
               <Flex align="start" gap={[3, 4]} key={index} position="relative" py={3}>
                 <Box flexShrink={0} mt="6px">
                   <Box
-                    bg={index === about.journeyPhases!.length - 1 ? 'cyan.400' : dotBg}
+                    bg={index === (about.journeyPhases ?? []).length - 1 ? 'cyan.400' : dotBg}
                     border="2px solid"
-                    borderColor={index === about.journeyPhases!.length - 1 ? 'cyan.400' : dotBorderColor}
+                    borderColor={index === (about.journeyPhases ?? []).length - 1 ? 'cyan.400' : dotBorderColor}
                     borderRadius="full"
                     h="14px"
                     w="14px"

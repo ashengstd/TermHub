@@ -104,7 +104,7 @@ export const SECTION_SLOTS: SlotName[] = [
  */
 export function resolveSlots(
   templateSlots: ComponentSlots,
-  variantRegistry: Record<string, Record<string, React.ComponentType>>,
+  variantRegistry: Record<string, Record<string, React.ComponentType | undefined>>,
   userOverrides?: Record<string, string>,
 ): ComponentSlots {
   if (!userOverrides) return templateSlots
@@ -112,8 +112,9 @@ export function resolveSlots(
   const resolved = { ...templateSlots }
 
   for (const [slotName, variantId] of Object.entries(userOverrides)) {
-    if (slotName in resolved && variantRegistry[slotName]?.[variantId]) {
-      ;(resolved as unknown as Record<string, React.ComponentType>)[slotName] = variantRegistry[slotName][variantId]
+    const component = variantRegistry[slotName][variantId]
+    if (component) {
+      ;(resolved as unknown as Record<string, React.ComponentType>)[slotName] = component
     }
   }
 

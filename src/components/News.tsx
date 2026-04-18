@@ -31,7 +31,7 @@ const News = () => {
   const { t } = useTranslation()
   const { news: dataNews } = useLocalizedData()
   const news = sortNews(dataNews)
-  const lastUpdated = news.length > 0 ? news[0].date || 'N/A' : 'N/A'
+  const lastUpdated = news.length > 0 ? news[0].date ?? 'N/A' : 'N/A'
 
   return (
     <Container maxW="7xl" px={4}>
@@ -69,8 +69,8 @@ const News = () => {
               >
                 <Box mb={2}>
                   <Code>{item.date}</Code>{' '}
-                  {item.badge && (
-                    <Badge colorPalette={item.iconColor?.split('.')[0] || 'gray'} ml={2}>
+                  {item.badge !== '' && (
+                    <Badge colorPalette={item.iconColor.split('.')[0] ?? 'gray'} ml={2}>
                       {item.badge}
                     </Badge>
                   )}{' '}
@@ -79,7 +79,7 @@ const News = () => {
                   </Text>
                 </Box>
                 <Text>{item.description}</Text>
-                {item.links && item.links.length > 0 && (
+                {item.links.length > 0 && (
                   <HStack gap={3} mt={3} wrap="wrap">
                     {item.links.map((l, i) => (
                       <ChakraLink color="var(--accent-color)" href={l.url} key={i} rel="noopener noreferrer" target="_blank">

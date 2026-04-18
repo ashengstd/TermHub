@@ -29,7 +29,7 @@ export function ThemeInjector() {
     const tokens = activeTheme.cssVars[colorMode === 'dark' ? 'dark' : 'light']
     const root = document.documentElement
 
-    for (const [property, value] of Object.entries(tokens)) {
+    for (const [property, value] of Object.entries(tokens) as [string, string][]) {
       root.style.setProperty(property, value)
     }
   }, [colorMode, activeTheme])

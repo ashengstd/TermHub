@@ -9,8 +9,9 @@ import { routeTree } from './routeTree.gen'
 
 // Create a new router instance
 const router = createRouter({
-  basepath: import.meta.env.BASE_URL || '/',
+  basepath: import.meta.env.BASE_URL,
   routeTree,
+  scrollRestoration: true,
 })
 
 // Register the router instance for type-safety
@@ -20,10 +21,13 @@ declare module '@tanstack/react-router' {
   }
 }
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <ColorModeProvider>
-      <RouterProvider router={router} />
-    </ColorModeProvider>
-  </React.StrictMode>,
-)
+const rootElement = document.getElementById('root')
+if (rootElement) {
+  ReactDOM.createRoot(rootElement).render(
+    <React.StrictMode>
+      <ColorModeProvider>
+        <RouterProvider router={router} />
+      </ColorModeProvider>
+    </React.StrictMode>,
+  )
+}

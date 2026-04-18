@@ -344,7 +344,7 @@ const HeroSection = ({
                 lineHeight="tall"
                 textAlign={['center', 'center', 'left']}
               >
-                {siteConfig.tagline ?? ''}
+                {siteConfig.tagline}
               </Text>
               <HStack flexShrink={0} gap={2}>
                 <Link
@@ -425,11 +425,11 @@ const HeroSection = ({
                   </Link>
                 ))}
               </HStack>
-              {((siteConfig.pets ?? []) as { emoji: string; image: string; name: string; }[])
+              {(siteConfig.pets as { emoji: string; image: string; name: string; }[])
                 .length > 0 && (
                 <HStack gap={[4, 5]} justify="center">
                   {(
-                    (siteConfig.pets ?? []) as { emoji: string; image: string; name: string; }[]
+                    siteConfig.pets as { emoji: string; image: string; name: string; }[]
                   ).map((pet) => (
                     <VStack gap={2} key={pet.name}>
                       {pet.image && (

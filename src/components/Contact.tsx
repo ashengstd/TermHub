@@ -23,7 +23,7 @@ const Contact = () => {
       value: siteOwner.contact.email,
     },
     {
-      display: `@${siteOwner.social.linkedin.split('/').filter(Boolean).pop()}`,
+      display: `@${siteOwner.social.linkedin.split('/').filter(Boolean).pop() ?? ''}`,
       href: siteOwner.social.linkedin,
       label: t('contact.linkedin'),
       value: siteOwner.social.linkedin,
@@ -35,7 +35,7 @@ const Contact = () => {
       value: siteOwner.social.github,
     },
     {
-      display: `@${siteOwner.social.medium.split('@').pop()}`,
+      display: `@${siteOwner.social.medium.split('@').pop() ?? ''}`,
       href: siteOwner.social.medium,
       label: t('contact.medium'),
       value: siteOwner.social.medium,

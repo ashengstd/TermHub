@@ -28,7 +28,7 @@ const Navbar: React.FC = () => {
   const { navItems, siteOwner } = useLocalizedData()
 
   const toggleLanguage = () => {
-    i18n.changeLanguage(i18n.language === 'zh' ? 'en' : 'zh')
+    void i18n.changeLanguage(i18n.language === 'zh' ? 'en' : 'zh')
   }
 
   const socialLinks = [

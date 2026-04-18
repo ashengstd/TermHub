@@ -12,7 +12,7 @@ import {
 } from '@chakra-ui/react'
 import { Icon } from '@chakra-ui/react'
 import { keyframes } from '@emotion/react'
-import React, { useCallback, useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { type IconType } from 'react-icons'
 import {
@@ -54,7 +54,7 @@ const buildThemes = (base: Record<ProjectItem['category'], CatTheme>): Record<Pr
   }
   const result = {} as Record<ProjectItem['category'], CatThemeWithAnim>
   for (const [k, v] of Object.entries(base) as [ProjectItem['category'], CatTheme][]) {
-    result[k] = { ...v, anim: `${b} ${durations[k]}s ease-in-out infinite` }
+    result[k] = { ...v, anim: `${b} ${durations[k].toString()}s ease-in-out infinite` }
   }
   return result
 }
@@ -83,7 +83,7 @@ const fmtDate = (v?: string) => {
 const getYear = (v?: string) => {
   if (!v) return 'Unknown'
   const d = new Date(v)
-  return Number.isNaN(d.getTime()) ? 'Unknown' : String(d.getFullYear())
+  return Number.isNaN(d.getTime()) ? 'Unknown' : d.getFullYear().toString()
 }
 
 const FlowNode: React.FC<{
@@ -94,12 +94,12 @@ const FlowNode: React.FC<{
 }> = ({ ct, hlc, isDark, item, onImageClick, termBorder, termMuted, termSecondary, termText }) => {
   const { t } = useTranslation()
   const [expanded, setExpanded] = useState(false)
-  const role = roleConfig[item.role || 'independent']
-  const hasImg = !!item.featuredImage
+  const role = roleConfig[item.role ?? 'independent']
+  const hasImg = item.featuredImage !== undefined && item.featuredImage !== ''
   const res: { label: string; url: string }[] = []
   if (item.link) res.push({ label: t('projects.source'), url: item.link })
   item.extraLinks?.forEach((l) => { if (!res.some((r) => r.url === l.url)) res.push(l) })
-  const hasExpandable = (item.highlights && item.highlights.length > 0) || item.story
+  const hasExpandable = (item.highlights !== undefined && item.highlights.length > 0) || item.story !== undefined
 
   return (
     <Flex align="start" gap={[3, 3, 4]} position="relative" py={3}>
@@ -155,12 +155,12 @@ const FlowNode: React.FC<{
             <MotionHover>
               <Box
                 borderRadius="sm" cursor="zoom-in" flexShrink={0}
-                minH={['180px', '200px', 'auto']} onClick={() => { if (item.featuredImage) onImageClick(withBase(item.featuredImage) as string, item.title) }} overflow="hidden"
+                minH={['180px', '200px', 'auto']} onClick={() => { if (item.featuredImage) onImageClick(withBase(item.featuredImage) ?? '', item.title) }} overflow="hidden"
                 w={['full', 'full', '260px']}
               >
                 <Image
                   _hover={{ transform: 'scale(1.03)' }} alt={item.title} bg={isDark ? 'rgba(0,0,0,0.2)' : 'rgba(0,0,0,0.02)'} h="full" objectFit="contain"
-                  p={1} src={withBase(item.featuredImage!)} transition="transform 0.3s" w="full"
+                  p={1} src={withBase(item.featuredImage)} transition="transform 0.3s" w="full"
                 />
               </Box>
             </MotionHover>
@@ -276,15 +276,15 @@ const Projects: React.FC = () => {
   }, [])
 
   const themes = useMemo(() => buildThemes(buildCategoryThemes(isDark)), [isDark, buildCategoryThemes])
-  const projects = useMemo<TP[]>(() => projectData.map((p, i) => ({ ...p, id: `p-${i}` })), [projectData])
+  const projects = useMemo<TP[]>(() => projectData.map((p, i) => ({ ...p, id: `p-${i.toString()}` })), [projectData])
 
   const tabs = useMemo(() => {
     const cnt: Record<string, number> = { all: projects.length }
-    projects.forEach((p) => { cnt[p.category] = (cnt[p.category] || 0) + 1 })
+    projects.forEach((p) => { cnt[p.category] = (cnt[p.category] ?? 0) + 1 })
     const cats: ProjectItem['category'][] = ['robotics', 'nlp', 'web-app', 'data', 'tooling', 'healthcare']
     return [
       { color: termInfo, count: cnt.all, icon: FaFolderOpen, key: 'all' as TabKey, label: t('projects.all') },
-      ...cats.filter((k) => cnt[k] > 0).map((k) => ({ color: themes[k].color, count: cnt[k], icon: themes[k].icon, key: k as TabKey, label: t(`category.${k}`) })),
+      ...cats.filter((k) => (cnt[k] ?? 0) > 0).map((k) => ({ color: themes[k].color, count: cnt[k], icon: themes[k].icon, key: k as TabKey, label: t(`category.${k}`) })),
     ]
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [projects, themes, isDark, t])
@@ -295,9 +295,9 @@ const Projects: React.FC = () => {
       .filter((p) => {
         if (activeTab !== 'all' && p.category !== activeTab) return false
         if (!q) return true
-        return [p.title, p.summary, p.tags?.join(' '), p.highlights?.join(' ')]
-          .filter(Boolean)
-          .some((s) => (s as string).toLowerCase().includes(q))
+        return [p.title, p.summary, p.tags.join(' '), p.highlights?.join(' ')]
+          .filter((s): s is string => s != null && s !== '')
+          .some((s) => s.toLowerCase().includes(q))
       })
       .sort((a, b) => {
         const da = a.date ? Date.parse(a.date) : 0
@@ -386,7 +386,7 @@ const Projects: React.FC = () => {
               return (
                 <MotionHover key={tab.key}>
                   <Flex _hover={{ bg: active ? termBg : isDark ? 'rgba(255,255,255,0.03)' : 'rgba(0,0,0,0.02)', color: tab.color }} align="center" as="button" bg={active ? termBg : 'transparent'} borderBottom={active ? `2px solid ${tab.color}` : '2px solid transparent'} color={active ? tab.color : termMuted} flexShrink={0} fontFamily="mono" fontSize="xs" fontWeight={active ? 'bold' : 'normal'} gap={1.5} onClick={() => setActiveTab(tab.key)} px={4} py={2} transition="all 0.15s" whiteSpace="nowrap">
-                    <Box css={active && tab.key !== 'all' ? { animation: themes[tab.key as ProjectItem['category']].anim } : undefined}><Icon as={tab.icon} boxSize="12px" /></Box>
+                    <Box css={active && tab.key !== 'all' ? { animation: themes[tab.key].anim } : undefined}><Icon as={tab.icon} boxSize="12px" /></Box>
                     {tab.label}
                     <Text as="span" opacity={0.7}>({tab.count})</Text>
                   </Flex>

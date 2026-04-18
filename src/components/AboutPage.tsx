@@ -14,7 +14,7 @@ import {
   VStack,
 } from '@chakra-ui/react'
 import { keyframes } from '@emotion/react'
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { useThemeConfig } from '@/config/theme'
@@ -50,11 +50,11 @@ const TerminalTypewriter: React.FC = () => {
   const tc = terminalPalette.colors(isDark)
 
   const { about, siteOwner } = useLocalizedData()
-  const phrases = useMemo(() => (siteOwner.rotatingSubtitles ?? []) as string[], [siteOwner.rotatingSubtitles])
-  const username = siteOwner.terminalUsername ?? 'user'
-  const fullName = siteOwner.name.full ?? ''
+  const phrases = useMemo(() => siteOwner.rotatingSubtitles, [siteOwner.rotatingSubtitles])
+  const username = siteOwner.terminalUsername
+  const fullName = siteOwner.name.full
 
-  const paragraphs = (about.bio ?? '')
+  const paragraphs = about.bio
     .split('\n')
     .map((s) => s.trim())
     .filter(Boolean)
@@ -123,7 +123,7 @@ const TerminalTypewriter: React.FC = () => {
   ]
 
   const fadeIn = (delay: number) => ({
-    animation: `${termFadeIn} 0.4s ease ${delay}s forwards`,
+    animation: `${termFadeIn} 0.4s ease ${delay.toString()}s forwards`,
     opacity: 0,
   })
 
@@ -274,7 +274,7 @@ const ProfileSidebar: React.FC = () => {
   const skillIconColor = useColorModeValue('gray.500', 'gray.400')
 
   type SkillItem = string | { icon?: string; name: string; }
-  const skills = (siteOwner.skills ?? []) as SkillItem[]
+  const skills = siteOwner.skills as SkillItem[]
   const getName = (s: SkillItem) => (typeof s === 'string' ? s : s.name)
   const getIcon = (s: SkillItem) => (typeof s === 'string' ? undefined : s.icon)
 
@@ -332,7 +332,7 @@ const ProfileSidebar: React.FC = () => {
               </Text>
             </HStack>
             <Text color={textColor} fontSize="xs" lineHeight="short" textAlign="center">
-              {siteConfig.tagline ?? ''}
+              {siteConfig.tagline}
             </Text>
           </VStack>
         </VStack>
@@ -463,7 +463,7 @@ const ProfileSidebar: React.FC = () => {
                     <DynamicIcon
                       boxSize={2.5}
                       color={skillIconColor}
-                      name={getIcon(skill)!}
+                      name={getIcon(skill)}
                     />
                   )}
                   <Text>{getName(skill)}</Text>

@@ -18,7 +18,7 @@ type SkillItem = string | { category?: string; icon?: string; name: string; }
 const SkillsSection: React.FC = () => {
   const { t } = useTranslation()
   const { siteOwner } = useLocalizedData()
-  const skills = (siteOwner.skills ?? []) as SkillItem[]
+  const skills = siteOwner.skills as SkillItem[]
   const tagBg = useColorModeValue('gray.100', 'gray.800')
   const tagColor = useColorModeValue('gray.700', 'gray.300')
   const iconColor = useColorModeValue('gray.500', 'gray.400')
@@ -53,7 +53,7 @@ const SkillsSection: React.FC = () => {
               py={1}
             >
               {getIcon(skill) && (
-                <DynamicIcon boxSize={3} color={iconColor} name={getIcon(skill)!} />
+                <DynamicIcon boxSize={3} color={iconColor} name={getIcon(skill)} />
               )}
               <Text>{getName(skill)}</Text>
             </HStack>

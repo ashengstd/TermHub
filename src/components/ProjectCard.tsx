@@ -46,7 +46,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
   const textColor = useColorModeValue('gray.600', 'gray.400')
   const highlightBorderColor = useColorModeValue('blue.400', 'blue.600')
 
-  const { category, date, extraLinks, highlights, link, summary, tags = [], title } = project
+  const { category, date, extraLinks, highlights, link, summary, tags, title } = project
 
   const primaryLinks = [] as { label: string; url: string }[]
   if (link) primaryLinks.push({ label: 'Project', url: link })

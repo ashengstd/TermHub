@@ -1,9 +1,9 @@
-import { Outlet, ScrollRestoration } from '@tanstack/react-router'
+import { ChakraProvider } from '@chakra-ui/react'
+import { Outlet } from '@tanstack/react-router'
 import { TanStackRouterDevtools } from '@tanstack/router-devtools'
 
 import { useLocalizedData } from '../hooks/useLocalizedData'
-import { getTemplate } from '../templates'
-import { getResolvedSlots } from '../templates/slots'
+import { getResolvedSlots, getTemplate, SlotProvider } from '../templates'
 import { ThemeProvider } from '../themes/ThemeContext'
 import { ThemeInjector } from '../themes/ThemeInjector'
 
@@ -16,13 +16,16 @@ export function RootLayout() {
   const { layout: TemplateLayout } = template
 
   return (
-    <ThemeProvider>
-      <ThemeInjector />
-      <TemplateLayout slots={slots}>
-        <Outlet />
-      </TemplateLayout>
-      <ScrollRestoration />
-      {process.env.NODE_ENV === 'development' && <TanStackRouterDevtools />}
-    </ThemeProvider>
+    <ChakraProvider value={template.theme}>
+      <ThemeProvider>
+        <ThemeInjector />
+        <SlotProvider slots={slots}>
+          <TemplateLayout>
+            <Outlet />
+          </TemplateLayout>
+        </SlotProvider>
+        {import.meta.env.DEV && <TanStackRouterDevtools />}
+      </ThemeProvider>
+    </ChakraProvider>
   )
 }

@@ -111,7 +111,7 @@ const Articles: React.FC = () => {
   })
 
   const articles = useMemo(
-    () => articleData.map((a, i) => ({ ...a, id: `article-${i}` })),
+    () => articleData.map((a, i) => ({ ...a, id: `article-${i.toString()}` })),
     [articleData],
   )
 
@@ -127,9 +127,9 @@ const Articles: React.FC = () => {
       .filter((e) => {
         if (selectedCategory !== 'all' && e.category !== selectedCategory) return false
         if (!q) return true
-        return [e.title, e.summary, e.tags?.join(' ')]
-          .filter(Boolean)
-          .some((t) => t!.toLowerCase().includes(q))
+        return [e.title, e.summary, e.tags.join(' ')]
+          .filter((s) => s !== '')
+          .some((t) => t.toLowerCase().includes(q))
       })
       .sort((a, b) => {
         const da = a.date ? Date.parse(a.date) : 0
@@ -142,8 +142,9 @@ const Articles: React.FC = () => {
     const map = new Map<string, typeof filteredArticles>()
     filteredArticles.forEach((a) => {
       const y = getYear(a.date) || 'Unknown'
-      if (!map.has(y)) map.set(y, [])
-      map.get(y)!.push(a)
+      const list = map.get(y) ?? []
+      list.push(a)
+      map.set(y, list)
     })
     return Array.from(map.entries()).sort(([a], [b]) =>
       a === 'Unknown' ? 1 : b === 'Unknown' ? -1 : Number(b) - Number(a),

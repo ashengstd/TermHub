@@ -18,7 +18,7 @@ const iconFor = (a: Award): string => {
   if (a.kind === 'employment') return 'FaBriefcase'
   if (a.kind === 'innovation') return 'FaLightbulb'
   if (a.kind === 'competition') {
-    const t = (a.title + ' ' + (a.org || '')).toLowerCase()
+    const t = (a.title + ' ' + (a.org ?? '')).toLowerCase()
     if (t.includes('first')) return 'FaTrophy'
     if (t.includes('second')) return 'FaMedal'
     if (t.includes('third')) return 'FaAward'
@@ -47,7 +47,7 @@ const AwardRow = ({ award }: { award: Award }) => {
   const titleColor = useColorModeValue('gray.800', 'gray.100')
   const mutedColor = useColorModeValue('gray.400', 'gray.500')
   const eggTextColor = useColorModeValue('gray.600', 'gray.300')
-  const meta = kindMeta[award.kind || 'other']
+  const meta = kindMeta[award.kind ?? 'other']
   const kindColor = useColorModeValue(meta.color[0], meta.color[1])
 
   const content = (

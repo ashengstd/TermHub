@@ -36,7 +36,7 @@ const TalksSection: React.FC = () => {
 
   const lineBg = useColorModeValue('gray.200', 'gray.700')
 
-  if (!talks || talks.length === 0) return null
+  if (talks.length === 0) return null
 
   return (
     <Box w="full">
@@ -50,7 +50,7 @@ const TalksSection: React.FC = () => {
         </Flex>
         <VStack align="stretch" gap={0}>
           {talks.map((talk, i) => {
-            const meta = typeLabels[talk.type || 'other'] || typeLabels.other
+            const meta = typeLabels[talk.type ?? 'other'] ?? typeLabels.other
             return (
               <Flex
                 align="start"
@@ -77,7 +77,7 @@ const TalksSection: React.FC = () => {
                       </Text>
                     )}
                   </HStack>
-                  {(talk.slidesUrl || talk.videoUrl) && (
+                  {(talk.slidesUrl ?? talk.videoUrl) && (
                     <HStack gap={2} mt={1}>
                       {talk.slidesUrl && (
                         <Link

@@ -141,9 +141,9 @@ const PublicationCard = ({ pub }: { pub: Publication }) => {
               letterSpacing="wide"
               textTransform="uppercase"
             >
-              {pub.venue && String(pub.year) && pub.venue.includes(String(pub.year))
+              {pub.venue?.includes(pub.year.toString())
                 ? pub.venue
-                : `${pub.venue} ${pub.year}`}
+                : `${pub.venue ?? ''} ${pub.year.toString()}`}
             </Text>
             {pub.venueType && (
               <Text color={metaColor} fontFamily="mono" fontSize="2xs">

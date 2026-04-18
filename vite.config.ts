@@ -1,5 +1,5 @@
 import mdx from '@mdx-js/rollup'
-import { TanStackRouterVite } from '@tanstack/router-vite-plugin'
+import { tanstackRouter } from '@tanstack/router-vite-plugin'
 import react from '@vitejs/plugin-react'
 import { copyFileSync, mkdirSync, writeFileSync } from 'fs'
 import { resolve } from 'path'
@@ -14,7 +14,7 @@ import contentImages from './plugins/vite-plugin-content-images'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: process.env.BASE_URL || '/',
+  base: process.env.BASE_URL ?? '/',
   build: {
     outDir: 'dist',
     rollupOptions: {
@@ -70,29 +70,39 @@ export default defineConfig({
         remarkGfm,
         remarkFrontmatter,
         // Injects plain-text body into frontmatter for card summaries
-        () => (tree, _file) => {
+        () => (tree: unknown, _file: unknown) => {
+          interface MdxNode {
+            children?: MdxNode[]
+            type: string
+            value?: string
+          }
+          const mdxTree = tree as MdxNode
           let text = ''
-          const walk = (node) => {
+          const walk = (node: MdxNode) => {
             if (node.type === 'yaml' || node.type === 'toml') return
-            if (node.type === 'text') text += node.value + ' '
+            if (node.type === 'text' && node.value) text += node.value + ' '
             if (node.children) node.children.forEach(walk)
           }
-          walk(tree)
-          
-          let yamlNode = tree.children.find(n => n.type === 'yaml')
+          walk(mdxTree)
+
+          let yamlNode = mdxTree.children?.find((n) => n.type === 'yaml')
           if (!yamlNode) {
             yamlNode = { type: 'yaml', value: '' }
-            tree.children.unshift(yamlNode)
+            if (mdxTree.children) {
+              mdxTree.children.unshift(yamlNode)
+            } else {
+              mdxTree.children = [yamlNode]
+            }
           }
           const cleanText = text.replace(/\n/g, ' ').replace(/"/g, '\\"').trim().slice(0, 1000)
-          yamlNode.value += `\nbodyText: "${cleanText}"`
+          yamlNode.value = (yamlNode.value ?? '') + `\nbodyText: "${cleanText}"`
         },
         [remarkMdxFrontmatter, { name: 'frontmatter' }],
         remarkMath,
       ],
     }),
     react(),
-    TanStackRouterVite({
+    tanstackRouter({
       generatedRouteTree: './src/routeTree.gen.ts',
       routesDirectory: './src/routes',
     }),

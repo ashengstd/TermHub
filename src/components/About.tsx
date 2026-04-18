@@ -51,7 +51,7 @@ function About() {
   const Contact = useSlot('contact')
 
   const renderSection = (sectionId: string, index: number) => {
-    const key = `${sectionId}-${index}`
+    const key = `${sectionId}-${index.toString()}`
     switch (sectionId as SlotName) {
       case 'accomplishments':
         return <Accomplishments key={key} />

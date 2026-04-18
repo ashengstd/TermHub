@@ -39,7 +39,7 @@ export const variantRegistry: Record<
   string,
   Record<string, React.ComponentType>
 > = Object.fromEntries(
-  Object.entries(terminalTemplate.slots).map(([slotName, component]) => [
+  Object.entries(terminalTemplate.slots as unknown as Record<string, React.ComponentType>).map(([slotName, component]) => [
     slotName,
     { terminal: component },
   ]),
@@ -68,7 +68,7 @@ export function getSlotVariants(slotName: string): string[] {
  * Falls back to the default template if the id is unknown.
  */
 export function getTemplate(id?: string): TemplateConfig {
-  if (id && templates[id]) {
+  if (id && id in templates) {
     return templates[id]
   }
   return templates[DEFAULT_TEMPLATE]
@@ -84,8 +84,8 @@ export function getTemplates(): TemplateConfig[] {
   return Object.values(templates)
 }
 
+export { SlotProvider } from './context'
 export { useSlot } from './hooks'
-export { SlotProvider } from './slots'
 export type { ComponentSlots, SlotName } from './slots'
 export { DEFAULT_SECTIONS, SECTION_SLOTS } from './slots'
 export type { LayoutProps, TemplateConfig, TemplatePages } from './types'

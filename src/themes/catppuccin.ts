@@ -47,11 +47,11 @@ function hex2rgb(hex: string): string {
   const r = parseInt(h.slice(0, 2), 16)
   const g = parseInt(h.slice(2, 4), 16)
   const b = parseInt(h.slice(4, 6), 16)
-  return `${r}, ${g}, ${b}`
+  return `${r.toString()}, ${g.toString()}, ${b.toString()}`
 }
 
 /** Build a semi-transparent overlay: rgba(accentHex, alpha). */
-const tint = (hex: string, alpha: number) => `rgba(${hex2rgb(hex)}, ${alpha})`
+const tint = (hex: string, alpha: number) => `rgba(${hex2rgb(hex)}, ${alpha.toString()})`
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Flavor palettes — exact values from https://catppuccin.com/palette/

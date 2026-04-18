@@ -45,7 +45,7 @@ export function getLocalizedNavItems(lang: string) {
     ...(cfg.features.experience ? [{ labelKey: 'nav.experience', path: '/experience' }] : []),
     ...(cfg.features.projects ? [{ labelKey: 'nav.projects', path: '/projects' }] : []),
     ...(cfg.features.articles ? [{ labelKey: 'nav.articles', path: '/articles' }] : []),
-    ...(cfg.features.guide !== false ? [{ labelKey: 'nav.guide', path: '/guide' }] : []),
+    ...(cfg.features.guide ? [{ labelKey: 'nav.guide', path: '/guide' }] : []),
     ...((cfg.features as Record<string, boolean>).about
       ? [{ labelKey: 'nav.about', path: '/about' }]
       : []),
@@ -58,7 +58,7 @@ export const navItems = getLocalizedNavItems('en')
 /** Get hero social icons for a specific language */
 export function getLocalizedHeroSocialIcons(lang: string) {
   const cfg = getLocalizedSiteConfig(lang)
-  return (cfg.heroSocialIcons ?? []).map((item) => ({
+  return cfg.heroSocialIcons.map((item) => ({
     color: item.color,
     href: (cfg.social as Record<string, string>)[item.platform] ?? '',
     icon: item.icon,
@@ -81,7 +81,7 @@ export function getLocalizedSiteOwner(lang: string) {
       location: cfg.contact.location,
     },
     name: cfg.name,
-    pets: (cfg.pets ?? []) as {
+    pets: cfg.pets as {
       description: string
       emoji: string
       image: string

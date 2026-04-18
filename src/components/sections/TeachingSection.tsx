@@ -33,7 +33,7 @@ const TeachingSection: React.FC = () => {
 
   const lineBg = useColorModeValue('gray.200', 'gray.700')
 
-  if (!teaching || teaching.length === 0) return null
+  if (teaching.length === 0) return null
 
   return (
     <Box w="full">

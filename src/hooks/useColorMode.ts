@@ -2,7 +2,7 @@ import { useTheme } from 'next-themes'
 
 export type ColorMode = 'dark' | 'light'
 
-interface DocumentWithTransition extends Document {
+interface DocumentWithTransition {
   startViewTransition?: (callback: () => Promise<void>) => ViewTransition
 }
 
@@ -34,14 +34,20 @@ export function useColorMode() {
       Math.max(y, window.innerHeight - y)
     )
 
-    const transition = doc.startViewTransition!(async () => {
+    if (!doc.startViewTransition) {
       setTheme(colorMode === 'dark' ? 'light' : 'dark')
+      return
+    }
+
+    const transition = doc.startViewTransition(async () => {
+      setTheme(colorMode === 'dark' ? 'light' : 'dark')
+      await Promise.resolve()
     })
 
-    transition.ready.then(() => {
+    void transition.ready.then(() => {
       const clipPath = [
-        `circle(0px at ${x}px ${y}px)`,
-        `circle(${endRadius}px at ${x}px ${y}px)`,
+        `circle(0px at ${x.toString()}px ${y.toString()}px)`,
+        `circle(${endRadius.toString()}px at ${x.toString()}px ${y.toString()}px)`,
       ]
       document.documentElement.animate(
         {
