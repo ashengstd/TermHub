@@ -1,11 +1,4 @@
-import {
-  Badge,
-  Box,
-  Container,
-  Flex,
-  Heading,
-  VStack
-} from '@chakra-ui/react'
+import { Badge, Box, Container, Flex, Heading, VStack } from '@chakra-ui/react'
 import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 
@@ -86,12 +79,7 @@ function About() {
                 <Heading fontWeight="semibold" size="md">
                   {t('about.recentUpdates')}
                 </Heading>
-                <Badge
-                  bg={newsBadgeBg}
-                  color={newsBadgeColor}
-                  fontFamily="mono"
-                  fontSize="2xs"
-                >
+                <Badge bg={newsBadgeBg} color={newsBadgeColor} fontFamily="mono" fontSize="2xs">
                   {t('about.news')}
                 </Badge>
                 <Box bg={lineColor} flex="1" h="1px" />

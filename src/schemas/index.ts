@@ -14,12 +14,7 @@ export const AwardKindSchema = z.enum([
   'travel',
 ])
 
-export const ExperienceCategorySchema = z.enum([
-  'academic',
-  'industry',
-  'leadership',
-  'research',
-])
+export const ExperienceCategorySchema = z.enum(['academic', 'industry', 'leadership', 'research'])
 
 export const ProjectCategorySchema = z.enum([
   'data',
@@ -30,26 +25,11 @@ export const ProjectCategorySchema = z.enum([
   'web-app',
 ])
 
-export const ProjectRoleSchema = z.enum([
-  'independent',
-  'lead',
-  'maintainer',
-  'tech-lead',
-])
+export const ProjectRoleSchema = z.enum(['independent', 'lead', 'maintainer', 'tech-lead'])
 
-export const PublicationStatusSchema = z.enum([
-  'accepted',
-  'preprint',
-  'published',
-])
+export const PublicationStatusSchema = z.enum(['accepted', 'preprint', 'published'])
 
-export const RoleTypeSchema = z.enum([
-  'leadership',
-  'mle',
-  'research',
-  'sde',
-  'teaching',
-])
+export const RoleTypeSchema = z.enum(['leadership', 'mle', 'research', 'sde', 'teaching'])
 
 export const TalkTypeSchema = z.enum([
   'invited',
@@ -71,13 +51,7 @@ export const TeachingRoleSchema = z.enum([
 ])
 
 // journal is used in real content files alongside the legacy set
-export const VenueTypeSchema = z.enum([
-  'conference',
-  'demo',
-  'journal',
-  'preprint',
-  'workshop',
-])
+export const VenueTypeSchema = z.enum(['conference', 'demo', 'journal', 'preprint', 'workshop'])
 
 // ── Atomic schemas ─────────────────────────────────────────────────────────
 
@@ -292,7 +266,14 @@ export const SiteConfigSchema = z.object({
     .optional(),
   features: z.record(z.string(), z.boolean()).optional(),
   heroSocialIcons: z
-    .array(z.object({ color: z.string().optional(), icon: z.string(), label: z.string(), platform: z.string() }))
+    .array(
+      z.object({
+        color: z.string().optional(),
+        icon: z.string(),
+        label: z.string(),
+        platform: z.string(),
+      }),
+    )
     .optional(),
   name: z.object({
     authorVariants: z.array(z.string()).optional(),

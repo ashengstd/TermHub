@@ -37,7 +37,7 @@ const categoryFilter: Record<string, FilterType> = {
   research: 'academic',
 }
 
-const roleTypeConfig: Record<RoleType, { color: (dk: boolean) => string; labelKey: string; }> = {
+const roleTypeConfig: Record<RoleType, { color: (dk: boolean) => string; labelKey: string }> = {
   leadership: {
     color: (dk) => (dk ? '#ebcb8b' : '#c47d46'),
     labelKey: 'experience.roleLeadership',
@@ -110,7 +110,6 @@ const Experience: React.FC = () => {
   const hoverBg = isDark ? 'rgba(255,255,255,0.03)' : 'rgba(0,0,0,0.02)'
 
   useEffect(() => {
-     
     const timer = setInterval(() => {
       setTick((t) => (t + 1) % 1000)
     }, 200)
@@ -475,7 +474,9 @@ const Experience: React.FC = () => {
                       fontWeight="bold"
                       letterSpacing="0.04em"
                     >
-                      {group.year === 'Present' ? t('experience.present').toUpperCase() : group.year}
+                      {group.year === 'Present'
+                        ? t('experience.present').toUpperCase()
+                        : group.year}
                     </Text>
                     <Text color={termSecondary} fontSize="2xs">
                       {group.year === 'Present'
@@ -589,11 +590,18 @@ const Experience: React.FC = () => {
                                 ) : (
                                   <Text color={termCommand}>{exp.company}</Text>
                                 )}
-                                {exp.location && <Text color={termSecondary}>· {exp.location}</Text>}
+                                {exp.location && (
+                                  <Text color={termSecondary}>· {exp.location}</Text>
+                                )}
                               </Flex>
 
                               {/* Date on mobile */}
-                              <Text color={termSecondary} display={{ base: "block", md: "none" }} fontSize="2xs" mt={0.5}>
+                              <Text
+                                color={termSecondary}
+                                display={{ base: 'block', md: 'none' }}
+                                fontSize="2xs"
+                                mt={0.5}
+                              >
                                 {fmtDate(exp.start)} – {fmtDate(exp.end)}
                               </Text>
                             </Box>
@@ -601,7 +609,7 @@ const Experience: React.FC = () => {
                             {/* Period (desktop) */}
                             <Text
                               color={termSecondary}
-                              display={{ base: "none", md: "block" }}
+                              display={{ base: 'none', md: 'block' }}
                               flexShrink={0}
                               fontSize="xs"
                               pt="2px"
@@ -747,14 +755,14 @@ const Experience: React.FC = () => {
             <Text color={termPrompt} flexShrink={0} fontFamily="mono" mr={2}>
               $
             </Text>
-              <Input
-                color={termText}
-                flex="1"
-                fontFamily="mono"
-                onChange={(e) => setCommand(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter') handleCommand(command)
-                }}
+            <Input
+              color={termText}
+              flex="1"
+              fontFamily="mono"
+              onChange={(e) => setCommand(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') handleCommand(command)
+              }}
               placeholder={t('experience.typeHelp')}
               size="xs"
               value={command}

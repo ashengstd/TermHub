@@ -1,11 +1,6 @@
 import type { z } from 'zod'
 
-import type {
-  About,
-  Experience,
-  ProjectItem,
-  Publication,
-} from '../types'
+import type { About, Experience, ProjectItem, Publication } from '../types'
 
 import {
   AboutFrontmatterSchema,
@@ -102,8 +97,26 @@ const build = (lang: 'en' | 'zh') => {
   const g = lang === 'en' ? globsEn : globsZh
   const raw =
     lang === 'en'
-      ? { awards: awardsEn, exp: expEn, logos: logosEn, news: newsEn, res: resEn, site: siteEn, talks: talksEn, teach: teachEn }
-      : { awards: awardsZh, exp: expZh, logos: logosZh, news: newsZh, res: resZh, site: siteZh, talks: talksZh, teach: teachZh }
+      ? {
+          awards: awardsEn,
+          exp: expEn,
+          logos: logosEn,
+          news: newsEn,
+          res: resEn,
+          site: siteEn,
+          talks: talksEn,
+          teach: teachEn,
+        }
+      : {
+          awards: awardsZh,
+          exp: expZh,
+          logos: logosZh,
+          news: newsZh,
+          res: resZh,
+          site: siteZh,
+          talks: talksZh,
+          teach: teachZh,
+        }
 
   const L = lang.toUpperCase()
   const expParsed = parseContent(ExperienceJsonSchema, raw.exp, `experience.json [${L}]`)
@@ -122,7 +135,11 @@ const build = (lang: 'en' | 'zh') => {
     institutionLogos: parseContent(LogosJsonSchema, raw.logos, `logos.json [${L}]`),
     news: parseContent(NewsJsonSchema, raw.news, `news.json [${L}]`),
     projects: collectMd(g.projects, ProjectFrontmatterSchema, `projects [${L}]`) as ProjectItem[],
-    publications: collectMd(g.pubs, PublicationFrontmatterSchema, `publications [${L}]`) as Publication[],
+    publications: collectMd(
+      g.pubs,
+      PublicationFrontmatterSchema,
+      `publications [${L}]`,
+    ) as Publication[],
     research: parseContent(ResearchSchema, raw.res, `research.json [${L}]`),
     siteConfig: parseContent(SiteConfigSchema, raw.site, `site.json [${L}]`),
     talks: parseContent(TalksJsonSchema, raw.talks, `talks.json [${L}]`),

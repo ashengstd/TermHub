@@ -29,7 +29,7 @@ const iconFor = (a: Award): string => {
   return 'FaCoins'
 }
 
-const kindMeta: Record<string, { color: [string, string]; labelKey: string; }> = {
+const kindMeta: Record<string, { color: [string, string]; labelKey: string }> = {
   competition: { color: ['orange.400', 'orange.300'], labelKey: 'awards.competition' },
   employment: { color: ['blue.500', 'blue.300'], labelKey: 'awards.employment' },
   grant: { color: ['yellow.500', 'yellow.300'], labelKey: 'awards.grant' },

@@ -118,12 +118,7 @@ const NewsCard: React.FC<NewsCardProps> = ({ news }) => {
         </Flex>
 
         {/* Description text */}
-        <Text
-          color={descColor}
-          fontSize="sm"
-          lineHeight="taller"
-          mb={3}
-        >
+        <Text color={descColor} fontSize="sm" lineHeight="taller" mb={3}>
           {news.description}
         </Text>
 

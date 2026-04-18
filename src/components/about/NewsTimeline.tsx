@@ -1,12 +1,4 @@
-import {
-  Box,
-  Collapsible,
-  Flex,
-  HStack,
-  Link,
-  Text,
-  useBreakpointValue
-} from '@chakra-ui/react'
+import { Box, Collapsible, Flex, HStack, Link, Text, useBreakpointValue } from '@chakra-ui/react'
 import { keyframes } from '@emotion/react'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -223,7 +215,11 @@ const NewsTimeline: React.FC<NewsTimelineProps> = ({ news }) => {
   const termSecondary = tc.secondary
 
   // Type colors (for ANSI-like color coding)
-  interface TypeColorEntry { bg: string; fg: string; icon: string }
+  interface TypeColorEntry {
+    bg: string
+    fg: string
+    icon: string
+  }
   const typeColors: Record<string, TypeColorEntry | undefined> & { default: TypeColorEntry } = {
     course: {
       bg: isDark ? 'rgba(180, 142, 173, 0.15)' : 'rgba(154, 86, 162, 0.1)',
@@ -619,10 +615,22 @@ const NewsTimeline: React.FC<NewsTimelineProps> = ({ news }) => {
             fontWeight="bold"
             py={[0.5, 1]}
           >
-            <Text color={termHighlight} overflow="hidden" textOverflow="ellipsis" w={dateColumnWidth} whiteSpace="nowrap">
+            <Text
+              color={termHighlight}
+              overflow="hidden"
+              textOverflow="ellipsis"
+              w={dateColumnWidth}
+              whiteSpace="nowrap"
+            >
               {isVerySmallScreen ? t('newsTimeline.time') : t('newsTimeline.timestamp')}
             </Text>
-            <Text color={termParam} overflow="hidden" textOverflow="ellipsis" w={typeColumnWidth} whiteSpace="nowrap">
+            <Text
+              color={termParam}
+              overflow="hidden"
+              textOverflow="ellipsis"
+              w={typeColumnWidth}
+              whiteSpace="nowrap"
+            >
               {isVerySmallScreen ? t('newsTimeline.cat') : t('newsTimeline.category')}
             </Text>
             <Text color={termInfo} display={['none', 'none', 'block']} w={idColumnWidth}>
@@ -672,7 +680,14 @@ const NewsTimeline: React.FC<NewsTimelineProps> = ({ news }) => {
                 px={[0, 0.5]}
                 py={[0.5, 1, 1.5]}
               >
-                <Text color={termHighlight} fontWeight="medium" overflow="hidden" textOverflow="ellipsis" w={dateColumnWidth} whiteSpace="nowrap">
+                <Text
+                  color={termHighlight}
+                  fontWeight="medium"
+                  overflow="hidden"
+                  textOverflow="ellipsis"
+                  w={dateColumnWidth}
+                  whiteSpace="nowrap"
+                >
                   {formatDate(item.date)}
                 </Text>
                 <Box w={typeColumnWidth}>
@@ -735,12 +750,26 @@ const NewsTimeline: React.FC<NewsTimelineProps> = ({ news }) => {
                           .trim()}
                       </Text>
                     )}
-                    <Text color={termText} fontSize={['2xs', 'xs']} fontWeight="medium" overflow="hidden" textOverflow="ellipsis" whiteSpace="nowrap">
+                    <Text
+                      color={termText}
+                      fontSize={['2xs', 'xs']}
+                      fontWeight="medium"
+                      overflow="hidden"
+                      textOverflow="ellipsis"
+                      whiteSpace="nowrap"
+                    >
                       {isNarrowScreen ? truncateText(item.title, 60) : item.title}
                     </Text>
                   </Flex>
                   {showDescription && (
-                    <Text color={termSecondary} fontSize={['3xs', '2xs']} mt={0.5} overflow="hidden" textOverflow="ellipsis" whiteSpace="nowrap">
+                    <Text
+                      color={termSecondary}
+                      fontSize={['3xs', '2xs']}
+                      mt={0.5}
+                      overflow="hidden"
+                      textOverflow="ellipsis"
+                      whiteSpace="nowrap"
+                    >
                       {getDescriptionLength(item.description)}
                     </Text>
                   )}
@@ -757,7 +786,8 @@ const NewsTimeline: React.FC<NewsTimelineProps> = ({ news }) => {
                         <Link
                           _hover={{ color: termHighlight }}
                           color={termCommand}
-                          href={link.url} key={i}
+                          href={link.url}
+                          key={i}
                           onClick={(e) => e.stopPropagation()}
                           rel="noopener noreferrer"
                           target="_blank"
@@ -797,138 +827,145 @@ const NewsTimeline: React.FC<NewsTimelineProps> = ({ news }) => {
               </Flex>
 
               {/* Expanded details */}
-              <Collapsible.Root open={expandedItems[index]}><Collapsible.Content>
-                <Box
-                  bg={isDark ? 'rgba(76,86,106,0.1)' : 'rgba(203,213,225,0.15)'}
-                  borderLeft={`2px solid ${typeColors[item.type.toLowerCase()]?.fg ?? typeColors.default.fg}`}
-                  pl={[2, 3, 10]}
-                  pr={[2, 3]}
-                  py={[1.5, 2]}
-                >
-                  <Flex align="start" gap={2} mb={2}>
-                    <Box
-                      alignItems="center"
-                      bg={typeColors[item.type.toLowerCase()]?.bg ?? typeColors.default.bg}
-                      borderRadius="md"
-                      display={['none', 'flex']}
-                      flexShrink={0}
-                      justifyContent="center"
-                      mt={0.5}
-                      p={1.5}
-                    >
-                      <DynamicIcon
-                        boxSize={[3, 4]}
-                        color={typeColors[item.type.toLowerCase()]?.fg ?? typeColors.default.fg}
-                        name={typeColors[item.type.toLowerCase()]?.icon ?? typeColors.default.icon}
-                      />
-                    </Box>
-                    <Box flex={1} minW={0}>
-                      <Text color={termText} fontSize={['2xs', 'xs']} fontWeight="bold" mb={0.5}>
-                        {item.title}
-                      </Text>
-                      <Flex align="center" flexWrap="wrap" fontSize={['3xs', '2xs']} gap={[1, 2]}>
-                        <Text
+              <Collapsible.Root open={expandedItems[index]}>
+                <Collapsible.Content>
+                  <Box
+                    bg={isDark ? 'rgba(76,86,106,0.1)' : 'rgba(203,213,225,0.15)'}
+                    borderLeft={`2px solid ${typeColors[item.type.toLowerCase()]?.fg ?? typeColors.default.fg}`}
+                    pl={[2, 3, 10]}
+                    pr={[2, 3]}
+                    py={[1.5, 2]}
+                  >
+                    <Flex align="start" gap={2} mb={2}>
+                      <Box
+                        alignItems="center"
+                        bg={typeColors[item.type.toLowerCase()]?.bg ?? typeColors.default.bg}
+                        borderRadius="md"
+                        display={['none', 'flex']}
+                        flexShrink={0}
+                        justifyContent="center"
+                        mt={0.5}
+                        p={1.5}
+                      >
+                        <DynamicIcon
+                          boxSize={[3, 4]}
                           color={typeColors[item.type.toLowerCase()]?.fg ?? typeColors.default.fg}
-                          fontWeight="bold"
-                          textTransform="uppercase"
-                        >
-                          {item.type}
+                          name={
+                            typeColors[item.type.toLowerCase()]?.icon ?? typeColors.default.icon
+                          }
+                        />
+                      </Box>
+                      <Box flex={1} minW={0}>
+                        <Text color={termText} fontSize={['2xs', 'xs']} fontWeight="bold" mb={0.5}>
+                          {item.title}
                         </Text>
-                        <Text color={termSecondary}>·</Text>
-                        <Text color={termHighlight}>{item.date}</Text>
-                        {item.badge && (
-                          <>
-                            <Text color={termSecondary}>·</Text>
-                            <Text color={termSuccess} fontWeight="medium">
-                              {item.badge
-                                .replace(
-                                  /[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{1F900}-\u{1F9FF}]/gu,
-                                  '',
-                                )
-                                .replace(/[\u{FE00}-\u{FE0F}]/gu, '')
-                                .replace(/\u{200D}/gu, '')
-                                .replace(/\u{20E3}/gu, '')
-                                .trim()}
-                            </Text>
-                          </>
-                        )}
-                      </Flex>
-                    </Box>
-                  </Flex>
-                  {item.description && (
-                    <Text
-                      color={tc.secondary}
-                      css={
-                        isVerySmallScreen || isMobile
-                          ? {
-                              '&::-webkit-scrollbar': { background: 'transparent', width: '4px' },
-                              '&::-webkit-scrollbar-thumb': {
-                                background: tc.border,
-                                borderRadius: '2px',
-                              },
-                            }
-                          : {}
-                      }
-                      fontSize={['2xs', 'xs']}
-                      lineHeight="1.6"
-                      maxH={isVerySmallScreen ? '100px' : isMobile ? '200px' : 'none'}
-                      mb={2}
-                      overflowY={isVerySmallScreen || isMobile ? 'auto' : 'visible'}
-                      whiteSpace="pre-line"
-                    >
-                      {highlightData(item.description, {
-                        kw: termCommand,
-                        num: termHighlight,
-                        str: termSuccess,
-                      })}
-                    </Text>
-                  )}
-                  {item.links.length > 0 && (
-                    <Flex gap={[1.5, 2]} mt={1} wrap="wrap">
-                      {item.links.map((link, i) => (
-                        <Link
-                          _hover={{ textDecoration: 'none' }}
-                          href={link.url}
-                          key={i} onClick={(e) => e.stopPropagation()}
-                          rel="noopener noreferrer"
-                          target="_blank"
-                        >
-                          <Flex
-                            _hover={{
-                              bg: isDark ? 'rgba(136,192,208,0.15)' : 'rgba(42,118,156,0.1)',
-                              borderColor: termCommand,
-                            }}
-                            align="center"
-                            bg={isDark ? 'rgba(136,192,208,0.08)' : 'rgba(42,118,156,0.06)'}
-                            border="1px solid"
-                            borderColor={isDark ? 'rgba(136,192,208,0.2)' : 'rgba(42,118,156,0.15)'}
-                            borderRadius="md"
-                            color={termCommand}
-                            fontSize={['3xs', '2xs']}
-                            gap={1}
-                            px={[1.5, 2]}
-                            py={[0.5, 1]}
-                            transition="all 0.15s"
+                        <Flex align="center" flexWrap="wrap" fontSize={['3xs', '2xs']} gap={[1, 2]}>
+                          <Text
+                            color={typeColors[item.type.toLowerCase()]?.fg ?? typeColors.default.fg}
+                            fontWeight="bold"
+                            textTransform="uppercase"
                           >
-                            <DynamicIcon
-                              boxSize={[2, 2.5]}
-                              name={link.icon ?? 'FaExternalLinkAlt'}
-                            />
-                            <Text>
-                              {getResponsiveTextLength(
-                                link.text,
-                                isVerySmallScreen,
-                                isMobile,
-                                isSmallScreen,
-                              )}
-                            </Text>
-                          </Flex>
-                        </Link>
-                      ))}
+                            {item.type}
+                          </Text>
+                          <Text color={termSecondary}>·</Text>
+                          <Text color={termHighlight}>{item.date}</Text>
+                          {item.badge && (
+                            <>
+                              <Text color={termSecondary}>·</Text>
+                              <Text color={termSuccess} fontWeight="medium">
+                                {item.badge
+                                  .replace(
+                                    /[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{1F900}-\u{1F9FF}]/gu,
+                                    '',
+                                  )
+                                  .replace(/[\u{FE00}-\u{FE0F}]/gu, '')
+                                  .replace(/\u{200D}/gu, '')
+                                  .replace(/\u{20E3}/gu, '')
+                                  .trim()}
+                              </Text>
+                            </>
+                          )}
+                        </Flex>
+                      </Box>
                     </Flex>
-                  )}
-                </Box>
-              </Collapsible.Content></Collapsible.Root>
+                    {item.description && (
+                      <Text
+                        color={tc.secondary}
+                        css={
+                          isVerySmallScreen || isMobile
+                            ? {
+                                '&::-webkit-scrollbar': { background: 'transparent', width: '4px' },
+                                '&::-webkit-scrollbar-thumb': {
+                                  background: tc.border,
+                                  borderRadius: '2px',
+                                },
+                              }
+                            : {}
+                        }
+                        fontSize={['2xs', 'xs']}
+                        lineHeight="1.6"
+                        maxH={isVerySmallScreen ? '100px' : isMobile ? '200px' : 'none'}
+                        mb={2}
+                        overflowY={isVerySmallScreen || isMobile ? 'auto' : 'visible'}
+                        whiteSpace="pre-line"
+                      >
+                        {highlightData(item.description, {
+                          kw: termCommand,
+                          num: termHighlight,
+                          str: termSuccess,
+                        })}
+                      </Text>
+                    )}
+                    {item.links.length > 0 && (
+                      <Flex gap={[1.5, 2]} mt={1} wrap="wrap">
+                        {item.links.map((link, i) => (
+                          <Link
+                            _hover={{ textDecoration: 'none' }}
+                            href={link.url}
+                            key={i}
+                            onClick={(e) => e.stopPropagation()}
+                            rel="noopener noreferrer"
+                            target="_blank"
+                          >
+                            <Flex
+                              _hover={{
+                                bg: isDark ? 'rgba(136,192,208,0.15)' : 'rgba(42,118,156,0.1)',
+                                borderColor: termCommand,
+                              }}
+                              align="center"
+                              bg={isDark ? 'rgba(136,192,208,0.08)' : 'rgba(42,118,156,0.06)'}
+                              border="1px solid"
+                              borderColor={
+                                isDark ? 'rgba(136,192,208,0.2)' : 'rgba(42,118,156,0.15)'
+                              }
+                              borderRadius="md"
+                              color={termCommand}
+                              fontSize={['3xs', '2xs']}
+                              gap={1}
+                              px={[1.5, 2]}
+                              py={[0.5, 1]}
+                              transition="all 0.15s"
+                            >
+                              <DynamicIcon
+                                boxSize={[2, 2.5]}
+                                name={link.icon ?? 'FaExternalLinkAlt'}
+                              />
+                              <Text>
+                                {getResponsiveTextLength(
+                                  link.text,
+                                  isVerySmallScreen,
+                                  isMobile,
+                                  isSmallScreen,
+                                )}
+                              </Text>
+                            </Flex>
+                          </Link>
+                        ))}
+                      </Flex>
+                    )}
+                  </Box>
+                </Collapsible.Content>
+              </Collapsible.Root>
             </Box>
           ))}
         </Box>

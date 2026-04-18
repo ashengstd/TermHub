@@ -3,6 +3,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 
 import { ColorModeProvider } from './color-mode'
+import NotFound from './components/NotFound'
 import './index.css'
 // Import the generated route tree
 import { routeTree } from './routeTree.gen'
@@ -10,6 +11,7 @@ import { routeTree } from './routeTree.gen'
 // Create a new router instance
 const router = createRouter({
   basepath: import.meta.env.BASE_URL,
+  defaultNotFoundComponent: () => <NotFound />,
   routeTree,
   scrollRestoration: true,
 })

@@ -93,7 +93,14 @@ LOCATION = "${siteOwner.contact.location}"`}
               mt={8}
               p={6}
             >
-              <Heading as="h2" color={tc.highlight} fontFamily="mono" letterSpacing="widest" mb={6} size="sm">
+              <Heading
+                as="h2"
+                color={tc.highlight}
+                fontFamily="mono"
+                letterSpacing="widest"
+                mb={6}
+                size="sm"
+              >
                 // {t('contact.quickLinks').toUpperCase()}
               </Heading>
 
@@ -101,15 +108,26 @@ LOCATION = "${siteOwner.contact.location}"`}
                 {contactLinks.map((link) => (
                   <MotionBox key={link.label}>
                     <HStack gap={4} justify="space-between" mb={4} wrap="wrap">
-                      <Text as="span" color={tc.prompt} fontFamily="mono" fontSize="sm" fontWeight="bold" w="120px">
+                      <Text
+                        as="span"
+                        color={tc.prompt}
+                        fontFamily="mono"
+                        fontSize="sm"
+                        fontWeight="bold"
+                        w="120px"
+                      >
                         {link.label}:
                       </Text>
                       <MotionHover>
                         <Box flex="1">
                           <a
                             href={link.href}
-                            onMouseOut={(e) => (e.currentTarget.style.borderBottomColor = 'transparent')}
-                            onMouseOver={(e) => (e.currentTarget.style.borderBottomColor = tc.command)}
+                            onMouseOut={(e) =>
+                              (e.currentTarget.style.borderBottomColor = 'transparent')
+                            }
+                            onMouseOver={(e) =>
+                              (e.currentTarget.style.borderBottomColor = tc.command)
+                            }
                             rel="noopener noreferrer"
                             style={{
                               borderBottom: `1px solid transparent`,

@@ -1,13 +1,4 @@
-import {
-  Box,
-  Container,
-  Flex,
-  Heading,
-  HStack,
-  Link,
-  Text,
-  VStack
-} from '@chakra-ui/react'
+import { Box, Container, Flex, Heading, HStack, Link, Text, VStack } from '@chakra-ui/react'
 import { useTranslation } from 'react-i18next'
 
 import { useColorModeValue } from '@/hooks/useColorMode'
@@ -57,7 +48,7 @@ const ContactSection: React.FC = () => {
       label: 'Scholar',
       value: 'Google Scholar',
     },
-  ].filter(Boolean) as { href?: string; icon: string; label: string; value: string; }[]
+  ].filter(Boolean) as { href?: string; icon: string; label: string; value: string }[]
 
   const lineBg = useColorModeValue('gray.200', 'gray.700')
   if (items.length === 0) return null
@@ -82,7 +73,8 @@ const ContactSection: React.FC = () => {
               {item.href ? (
                 <Link
                   _hover={{ color: 'cyan.400' }}
-                  color={linkColor} fontFamily="mono"
+                  color={linkColor}
+                  fontFamily="mono"
                   fontSize="xs"
                   href={item.href}
                   rel="noopener noreferrer"

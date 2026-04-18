@@ -1,13 +1,4 @@
-import {
-  Box,
-  Container,
-  Flex,
-  Heading,
-  HStack,
-  Link,
-  Text,
-  VStack
-} from '@chakra-ui/react'
+import { Box, Container, Flex, Heading, HStack, Link, Text, VStack } from '@chakra-ui/react'
 import { useTranslation } from 'react-i18next'
 
 import { useColorModeValue } from '@/hooks/useColorMode'
@@ -75,7 +66,9 @@ const JourneySection: React.FC = () => {
                   <Box
                     bg={index === (about.journeyPhases ?? []).length - 1 ? 'cyan.400' : dotBg}
                     border="2px solid"
-                    borderColor={index === (about.journeyPhases ?? []).length - 1 ? 'cyan.400' : dotBorderColor}
+                    borderColor={
+                      index === (about.journeyPhases ?? []).length - 1 ? 'cyan.400' : dotBorderColor
+                    }
                     borderRadius="full"
                     h="14px"
                     w="14px"
@@ -96,11 +89,7 @@ const JourneySection: React.FC = () => {
                     <Text color={slashColor} fontSize="2xs">
                       /
                     </Text>
-                    <Text
-                      color={orgColor}
-                      fontFamily="mono"
-                      fontSize="2xs"
-                    >
+                    <Text color={orgColor} fontFamily="mono" fontSize="2xs">
                       {phase.org}
                     </Text>
                   </HStack>

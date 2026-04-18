@@ -7,18 +7,15 @@ import globals from 'globals'
 import tseslint from 'typescript-eslint'
 
 export default tseslint.config(
-  { 
-    ignores: ['dist', 'node_modules', 'mcp-server', 'plugins', 'public', '.wrangler'] 
+  {
+    ignores: ['dist', 'node_modules', 'mcp-server', 'plugins', 'public', '.wrangler'],
   },
   js.configs.recommended,
   ...tseslint.configs.strict, // Use base strict for all files
   ...tseslint.configs.stylistic, // Use base stylistic for all files
   perfectionist.configs['recommended-natural'],
   {
-    extends: [
-      ...tseslint.configs.strictTypeChecked,
-      ...tseslint.configs.stylisticTypeChecked,
-    ],
+    extends: [...tseslint.configs.strictTypeChecked, ...tseslint.configs.stylisticTypeChecked],
     // Apply type-checked rules ONLY to TS files
     files: ['**/*.{ts,tsx}'],
     languageOptions: {
@@ -42,13 +39,13 @@ export default tseslint.config(
         { fixStyle: 'inline-type-imports', prefer: 'type-imports' },
       ],
       '@typescript-eslint/no-confusing-void-expression': 'off',
-      
+
       '@typescript-eslint/no-deprecated': 'warn', // Downgrade to warn as it might be common in libs
       '@typescript-eslint/no-empty-object-type': 'off',
       // Strict rule promotions
       '@typescript-eslint/no-explicit-any': 'error',
       '@typescript-eslint/no-non-null-assertion': 'warn',
-      
+
       '@typescript-eslint/no-unused-vars': 'error',
       'no-console': ['error', { allow: ['warn', 'error'] }],
       'no-var': 'error',

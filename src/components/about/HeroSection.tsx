@@ -182,11 +182,7 @@ const HeroSection = ({
               </Box>
             </HStack>
 
-            <Box
-              borderColor={separatorColor}
-              borderTop="1px dashed"
-              w="full"
-            />
+            <Box borderColor={separatorColor} borderTop="1px dashed" w="full" />
 
             {/* Research & Education compact section */}
             {(research.length > 0 || education.length > 0) && (
@@ -252,7 +248,14 @@ const HeroSection = ({
                               >
                                 {item.lab}
                               </Text>
-                              <Text color={textColor} fontSize="2xs" lineHeight="short" overflow="hidden" textOverflow="ellipsis" whiteSpace="nowrap">
+                              <Text
+                                color={textColor}
+                                fontSize="2xs"
+                                lineHeight="short"
+                                overflow="hidden"
+                                textOverflow="ellipsis"
+                                whiteSpace="nowrap"
+                              >
                                 {item.advisor ? `w/ ${item.advisor}` : item.focus}
                               </Text>
                             </VStack>
@@ -323,11 +326,7 @@ const HeroSection = ({
               </SimpleGrid>
             )}
 
-            <Box
-              borderColor={separatorColor}
-              borderTop="1px dashed"
-              w="full"
-            />
+            <Box borderColor={separatorColor} borderTop="1px dashed" w="full" />
 
             {/* Welcome + contact */}
             <Flex
@@ -425,27 +424,26 @@ const HeroSection = ({
                   </Link>
                 ))}
               </HStack>
-              {(siteConfig.pets as { emoji: string; image: string; name: string; }[])
-                .length > 0 && (
+              {(siteConfig.pets as { emoji: string; image: string; name: string }[]).length > 0 && (
                 <HStack gap={[4, 5]} justify="center">
-                  {(
-                    siteConfig.pets as { emoji: string; image: string; name: string; }[]
-                  ).map((pet) => (
-                    <VStack gap={2} key={pet.name}>
-                      {pet.image && (
-                        <Image
-                          alt={pet.name}
-                          borderRadius="full"
-                          boxSize={['40px', '50px']}
-                          objectFit="cover"
-                          src={pet.image}
-                        />
-                      )}
-                      <Text fontSize="sm" fontWeight="medium">
-                        {pet.name} {pet.emoji}
-                      </Text>
-                    </VStack>
-                  ))}
+                  {(siteConfig.pets as { emoji: string; image: string; name: string }[]).map(
+                    (pet) => (
+                      <VStack gap={2} key={pet.name}>
+                        {pet.image && (
+                          <Image
+                            alt={pet.name}
+                            borderRadius="full"
+                            boxSize={['40px', '50px']}
+                            objectFit="cover"
+                            src={pet.image}
+                          />
+                        )}
+                        <Text fontSize="sm" fontWeight="medium">
+                          {pet.name} {pet.emoji}
+                        </Text>
+                      </VStack>
+                    ),
+                  )}
                 </HStack>
               )}
             </VStack>

@@ -25,10 +25,9 @@ export const variantRegistry: Record<
   string,
   Record<string, React.ComponentType>
 > = Object.fromEntries(
-  Object.entries(terminalTemplate.slots as unknown as Record<string, React.ComponentType>).map(([slotName, component]) => [
-    slotName,
-    { terminal: component },
-  ]),
+  Object.entries(terminalTemplate.slots as unknown as Record<string, React.ComponentType>).map(
+    ([slotName, component]) => [slotName, { terminal: component }],
+  ),
 )
 
 /** Default template id when none is specified in site.json */

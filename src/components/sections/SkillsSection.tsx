@@ -1,11 +1,4 @@
-import {
-  Box,
-  Container,
-  Flex,
-  Heading,
-  HStack,
-  Text
-} from '@chakra-ui/react'
+import { Box, Container, Flex, Heading, HStack, Text } from '@chakra-ui/react'
 import { useTranslation } from 'react-i18next'
 
 import { useColorModeValue } from '@/hooks/useColorMode'
@@ -13,7 +6,7 @@ import { useLocalizedData } from '@/hooks/useLocalizedData'
 
 import DynamicIcon from '../DynamicIcon'
 
-type SkillItem = string | { category?: string; icon?: string; name: string; }
+type SkillItem = string | { category?: string; icon?: string; name: string }
 
 const SkillsSection: React.FC = () => {
   const { t } = useTranslation()

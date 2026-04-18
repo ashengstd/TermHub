@@ -14,7 +14,7 @@ export function highlightData(
 ): React.ReactNode {
   if (!text) return null
 
-  // 1. Numbers/Versions (digits, units, common prefixes like 'V') 
+  // 1. Numbers/Versions (digits, units, common prefixes like 'V')
   // 2. Quoted strings
   // 3. Technical Acronyms (mostly letters, avoid splitting versions)
   const rx =

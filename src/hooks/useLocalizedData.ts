@@ -2,12 +2,12 @@ import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { getLocalizedData } from '../data'
-import { 
-  getLocalizedGithubUsername, 
-  getLocalizedHeroSocialIcons, 
-  getLocalizedNavItems, 
+import {
+  getLocalizedGithubUsername,
+  getLocalizedHeroSocialIcons,
+  getLocalizedNavItems,
   getLocalizedSiteConfig,
-  getLocalizedSiteOwner
+  getLocalizedSiteOwner,
 } from '../site.config'
 
 /**
@@ -25,14 +25,14 @@ export function useLocalizedData() {
     const navItems = getLocalizedNavItems(lang)
     const heroSocialIcons = getLocalizedHeroSocialIcons(lang)
     const githubUsername = getLocalizedGithubUsername(lang)
-    
-    return { 
-      ...data, 
-      githubUsername, 
-      heroSocialIcons, 
-      navItems, 
+
+    return {
+      ...data,
+      githubUsername,
+      heroSocialIcons,
+      navItems,
       siteConfig,
-      siteOwner
+      siteOwner,
     }
   }, [lang])
 }

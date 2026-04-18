@@ -13,9 +13,18 @@ const config = defineConfig({
   theme: {
     tokens: {
       fonts: {
-        body: { value: '"Maple Mono CN", "Maple Mono", "SF Mono", Consolas, "Liberation Mono", Menlo, monospace' },
-        heading: { value: '"Maple Mono CN", "Maple Mono", "SF Mono", Consolas, "Liberation Mono", Menlo, monospace' },
-        mono: { value: '"Maple Mono CN", "Maple Mono", "SF Mono", Consolas, "Liberation Mono", Menlo, monospace' },
+        body: {
+          value:
+            '"Maple Mono CN", "Maple Mono", "SF Mono", Consolas, "Liberation Mono", Menlo, monospace',
+        },
+        heading: {
+          value:
+            '"Maple Mono CN", "Maple Mono", "SF Mono", Consolas, "Liberation Mono", Menlo, monospace',
+        },
+        mono: {
+          value:
+            '"Maple Mono CN", "Maple Mono", "SF Mono", Consolas, "Liberation Mono", Menlo, monospace',
+        },
       },
     },
   },

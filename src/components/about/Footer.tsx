@@ -1,11 +1,4 @@
-import {
-  Box,
-  Container,
-  HStack,
-  Link,
-  Text,
-  VStack
-} from '@chakra-ui/react'
+import { Box, Container, HStack, Link, Text, VStack } from '@chakra-ui/react'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { SiCloudflare, SiGithub } from 'react-icons/si'
@@ -36,7 +29,8 @@ const Footer: React.FC = () => {
           <HStack gap={6} mb={2}>
             <Link
               _hover={{ color: 'var(--accent-color)', transform: 'translateY(-2px)' }}
-              color={textColor} href="https://github.com"
+              color={textColor}
+              href="https://github.com"
               rel="noopener noreferrer"
               target="_blank"
               transition="all 0.2s"
@@ -45,7 +39,8 @@ const Footer: React.FC = () => {
             </Link>
             <Link
               _hover={{ color: 'orange.500', transform: 'translateY(-2px)' }}
-              color={textColor} href="https://cloudflare.com"
+              color={textColor}
+              href="https://cloudflare.com"
               rel="noopener noreferrer"
               target="_blank"
               transition="all 0.2s"
@@ -58,7 +53,8 @@ const Footer: React.FC = () => {
             <Text>{t('footer.poweredBy')}</Text>
             <Link
               _hover={{ textDecoration: 'underline' }}
-              color="cyan.500" fontWeight="medium"
+              color="cyan.500"
+              fontWeight="medium"
               href="https://github.com/H-Freax/TermHub"
               rel="noopener noreferrer"
               target="_blank"

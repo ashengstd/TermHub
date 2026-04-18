@@ -1,9 +1,4 @@
-import {
-  Box,
-  Container,
-  Flex,
-  Heading,
-} from '@chakra-ui/react'
+import { Box, Container, Flex, Heading } from '@chakra-ui/react'
 import { useTranslation } from 'react-i18next'
 
 import { useColorModeValue } from '@/hooks/useColorMode'

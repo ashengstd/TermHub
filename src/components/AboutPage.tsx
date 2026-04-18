@@ -114,7 +114,7 @@ const TerminalTypewriter: React.FC = () => {
   const prompt = `[${username}@portfolio ~]$`
 
   // Static history lines shown above the animated line
-  const historyLines: { cmd: string; output?: string; prompt: string; }[] = [
+  const historyLines: { cmd: string; output?: string; prompt: string }[] = [
     {
       cmd: 'whoami',
       output: fullName,
@@ -273,7 +273,7 @@ const ProfileSidebar: React.FC = () => {
   const avatarBorderColor = useColorModeValue('gray.200', 'gray.600')
   const skillIconColor = useColorModeValue('gray.500', 'gray.400')
 
-  type SkillItem = string | { icon?: string; name: string; }
+  type SkillItem = string | { icon?: string; name: string }
   const skills = siteOwner.skills as SkillItem[]
   const getName = (s: SkillItem) => (typeof s === 'string' ? s : s.name)
   const getIcon = (s: SkillItem) => (typeof s === 'string' ? undefined : s.icon)
@@ -460,11 +460,7 @@ const ProfileSidebar: React.FC = () => {
                   py={0.5}
                 >
                   {getIcon(skill) && (
-                    <DynamicIcon
-                      boxSize={2.5}
-                      color={skillIconColor}
-                      name={getIcon(skill)}
-                    />
+                    <DynamicIcon boxSize={2.5} color={skillIconColor} name={getIcon(skill)} />
                   )}
                   <Text>{getName(skill)}</Text>
                 </HStack>

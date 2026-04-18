@@ -1,12 +1,4 @@
-import {
-  Box,
-  Container,
-  Flex,
-  Heading,
-  Link,
-  Text,
-  VStack
-} from '@chakra-ui/react'
+import { Box, Container, Flex, Heading, Link, Text, VStack } from '@chakra-ui/react'
 
 import { useColorModeValue } from '@/hooks/useColorMode'
 import { useLocalizedData } from '@/hooks/useLocalizedData'
@@ -46,7 +38,12 @@ const MentorshipSection: React.FC = () => {
               py={2.5}
             >
               <Box bg="cyan.400" borderRadius="full" flexShrink={0} h="6px" w="6px" />
-              <Link _hover={{ textDecoration: 'none' }} href={mentee.url} rel="noopener noreferrer" target="_blank">
+              <Link
+                _hover={{ textDecoration: 'none' }}
+                href={mentee.url}
+                rel="noopener noreferrer"
+                target="_blank"
+              >
                 <Text
                   _hover={{ color: 'cyan.400' }}
                   color={nameColor}

@@ -21,7 +21,9 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   }
 
   return (
-    <ThemeContext.Provider value={{ activeTheme: themes[themeKey], currentThemeKey: themeKey, setTheme: handleSetTheme }}>
+    <ThemeContext.Provider
+      value={{ activeTheme: themes[themeKey], currentThemeKey: themeKey, setTheme: handleSetTheme }}
+    >
       {children}
     </ThemeContext.Provider>
   )

@@ -1,13 +1,4 @@
-import {
-  Box,
-  Container,
-  Flex,
-  Heading,
-  HStack,
-  Link,
-  Text,
-  VStack
-} from '@chakra-ui/react'
+import { Box, Container, Flex, Heading, HStack, Link, Text, VStack } from '@chakra-ui/react'
 import { useTranslation } from 'react-i18next'
 
 import { useColorModeValue } from '@/hooks/useColorMode'
@@ -15,7 +6,7 @@ import { useLocalizedData } from '@/hooks/useLocalizedData'
 
 import DynamicIcon from '../DynamicIcon'
 
-const typeLabels: Record<string, { color: string; icon: string; }> = {
+const typeLabels: Record<string, { color: string; icon: string }> = {
   invited: { color: 'purple.400', icon: 'FaUserTie' },
   keynote: { color: 'yellow.400', icon: 'FaStar' },
   oral: { color: 'cyan.400', icon: 'FaMicrophone' },
@@ -82,7 +73,8 @@ const TalksSection: React.FC = () => {
                       {talk.slidesUrl && (
                         <Link
                           _hover={{ textDecoration: 'underline' }}
-                          color="cyan.400" fontFamily="mono"
+                          color="cyan.400"
+                          fontFamily="mono"
                           fontSize="2xs"
                           href={talk.slidesUrl}
                           rel="noopener noreferrer"
@@ -94,7 +86,8 @@ const TalksSection: React.FC = () => {
                       {talk.videoUrl && (
                         <Link
                           _hover={{ textDecoration: 'underline' }}
-                          color="cyan.400" fontFamily="mono"
+                          color="cyan.400"
+                          fontFamily="mono"
                           fontSize="2xs"
                           href={talk.videoUrl}
                           rel="noopener noreferrer"

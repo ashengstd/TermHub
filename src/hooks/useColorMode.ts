@@ -16,11 +16,10 @@ export function useColorMode() {
 
   const toggleColorMode = (event?: MouseEvent | React.MouseEvent) => {
     const doc = document as DocumentWithTransition
-    
+
     // Check for browser support and respect system motion preferences
     const isSupported =
-      doc.startViewTransition &&
-      !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      doc.startViewTransition && !window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
     if (!isSupported || !event) {
       setTheme(colorMode === 'dark' ? 'light' : 'dark')
@@ -31,7 +30,7 @@ export function useColorMode() {
     const y = event.clientY
     const endRadius = Math.hypot(
       Math.max(x, window.innerWidth - x),
-      Math.max(y, window.innerHeight - y)
+      Math.max(y, window.innerHeight - y),
     )
 
     if (!doc.startViewTransition) {
@@ -57,7 +56,7 @@ export function useColorMode() {
           duration: 450,
           easing: 'ease-in-out',
           pseudoElement: '::view-transition-new(root)',
-        }
+        },
       )
     })
   }

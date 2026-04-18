@@ -172,5 +172,16 @@
     "workshop": "WORKSHOP",
     "demo": "DEMO TRACK",
     "preprint": "PREPRINT"
+  },
+  "notFound": {
+    "title": "404 Not Found",
+    "description": "The requested URL was not found on this server.",
+    "command": "curl -i https://404.com",
+    "returnHome": "Return Home",
+    "goBack": "Go Back",
+    "errorMessage": "Error: 404 Page Not Found",
+    "connection": "Connection: close",
+    "contentType": "Content-Type: text/plain",
+    "date": "Date:"
   }
 }

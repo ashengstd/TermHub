@@ -172,5 +172,16 @@
     "workshop": "研讨会",
     "demo": "演示专场",
     "preprint": "预印本"
+  },
+  "notFound": {
+    "title": "404 页面未找到",
+    "description": "请求的 URL 在此服务器上未找到。",
+    "command": "curl -i https://404.com",
+    "returnHome": "返回首页",
+    "goBack": "返回上一页",
+    "errorMessage": "错误: 404 页面未找到",
+    "connection": "连接: 已关闭",
+    "contentType": "内容类型: text/plain",
+    "date": "日期:"
   }
 }

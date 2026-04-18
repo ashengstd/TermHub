@@ -1,12 +1,4 @@
-import {
-  Box,
-  Heading,
-  HStack,
-  Image,
-  SimpleGrid,
-  Text,
-  VStack
-} from '@chakra-ui/react'
+import { Box, Heading, HStack, Image, SimpleGrid, Text, VStack } from '@chakra-ui/react'
 import React from 'react'
 
 import { useColorModeValue } from '@/hooks/useColorMode'

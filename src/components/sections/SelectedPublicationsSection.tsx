@@ -1,4 +1,16 @@
-import { Box, Collapsible, Container, Dialog, Flex, Heading, HStack, Image, Link, Text, VStack } from '@chakra-ui/react'
+import {
+  Box,
+  Collapsible,
+  Container,
+  Dialog,
+  Flex,
+  Heading,
+  HStack,
+  Image,
+  Link,
+  Text,
+  VStack,
+} from '@chakra-ui/react'
 import { Icon } from '@chakra-ui/react'
 import { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -70,10 +82,10 @@ const PublicationCard = ({ pub }: { pub: Publication }) => {
   const { t } = useTranslation()
   const { colorMode } = useColorMode()
   const isDark = colorMode === 'dark'
-  
+
   const [isAbstractOpen, setAbstractOpen] = useState(false)
   const [isImageOpen, setImageOpen] = useState(false)
-  
+
   const borderColor = isDark ? 'gray.700' : 'gray.200'
   const cardBg = isDark ? 'gray.800' : 'white'
   const hoverBorderColor = isDark ? 'cyan.600' : 'cyan.300'
@@ -151,21 +163,11 @@ const PublicationCard = ({ pub }: { pub: Publication }) => {
               </Text>
             )}
           </HStack>
-          <Heading
-            color={titleColor}
-            fontWeight="semibold"
-            lineHeight="tall"
-            size="sm"
-          >
+          <Heading color={titleColor} fontWeight="semibold" lineHeight="tall" size="sm">
             {pub.title}
           </Heading>
           <VStack align="start" gap={1.5} w="full">
-            <Text
-              color={authorColor}
-              fontSize="xs"
-              lineClamp={2}
-              lineHeight="base"
-            >
+            <Text color={authorColor} fontSize="xs" lineClamp={2} lineHeight="base">
               {pub.authors.map((author: string, idx: number) => {
                 const isHighlighted = pub.isCoFirst && pub.coFirstAuthors?.includes(author)
                 return (
@@ -177,7 +179,9 @@ const PublicationCard = ({ pub }: { pub: Publication }) => {
                   >
                     {author}
                     {isHighlighted && (
-                      <Text as="sup" color="cyan.400" fontSize="2xs">*</Text>
+                      <Text as="sup" color="cyan.400" fontSize="2xs">
+                        *
+                      </Text>
                     )}
                     {idx < pub.authors.length - 1 && ', '}
                   </Text>
@@ -188,12 +192,13 @@ const PublicationCard = ({ pub }: { pub: Publication }) => {
               <HStack flexWrap="wrap" gap={1.5}>
                 {pub.specialBadges.map((badge: string) => {
                   const isPrimary = badge === 'First Author' || badge === 'Co-First'
-                  const isHighlight = badge === 'Oral' || badge === 'Spotlight' || badge === 'Best Paper'
-                  
+                  const isHighlight =
+                    badge === 'Oral' || badge === 'Spotlight' || badge === 'Best Paper'
+
                   let badgeBg = 'transparent'
                   let badgeBorder = isDark ? 'gray.600' : 'gray.200'
                   let badgeText = isDark ? 'gray.400' : 'gray.500'
-                  
+
                   if (isPrimary) {
                     badgeBg = isDark ? 'whiteAlpha.50' : 'cyan.50'
                     badgeBorder = isDark ? 'cyan.700' : 'cyan.200'
@@ -231,12 +236,24 @@ const PublicationCard = ({ pub }: { pub: Publication }) => {
           </VStack>
           <Box bg={separatorColor} h="1px" w="full" />
           <HStack flexWrap="wrap" gap={1.5}>
-            {pub.links.paper && <PubLink href={pub.links.paper} icon="FaFileAlt" label={t('about.paper')} />}
-            {pub.links.arxiv && <PubLink href={pub.links.arxiv} icon="SiArxiv" label={t('about.arXiv')} />}
-            {pub.links.projectPage && <PubLink href={pub.links.projectPage} icon="FaGlobe" label={t('about.project')} />}
-            {pub.links.code && <PubLink href={pub.links.code} icon="FaGithub" label={t('about.code')} />}
-            {pub.links.demo && <PubLink href={pub.links.demo} icon="FaPlay" label={t('about.demo')} />}
-            {pub.links.dataset && <PubLink href={pub.links.dataset} icon="FaDatabase" label={t('about.dataset')} />}
+            {pub.links.paper && (
+              <PubLink href={pub.links.paper} icon="FaFileAlt" label={t('about.paper')} />
+            )}
+            {pub.links.arxiv && (
+              <PubLink href={pub.links.arxiv} icon="SiArxiv" label={t('about.arXiv')} />
+            )}
+            {pub.links.projectPage && (
+              <PubLink href={pub.links.projectPage} icon="FaGlobe" label={t('about.project')} />
+            )}
+            {pub.links.code && (
+              <PubLink href={pub.links.code} icon="FaGithub" label={t('about.code')} />
+            )}
+            {pub.links.demo && (
+              <PubLink href={pub.links.demo} icon="FaPlay" label={t('about.demo')} />
+            )}
+            {pub.links.dataset && (
+              <PubLink href={pub.links.dataset} icon="FaDatabase" label={t('about.dataset')} />
+            )}
             {pub.abstract && (
               <HStack
                 _hover={{ borderColor: 'cyan.400', color: 'cyan.400' }}
@@ -303,11 +320,23 @@ const PublicationCard = ({ pub }: { pub: Publication }) => {
           </Collapsible.Content>
         </Collapsible.Root>
       )}
-      
+
       {pub.featuredImage && (
-        <Dialog.Root onOpenChange={(e) => { if (!e.open) setImageOpen(false) }} open={isImageOpen}>
+        <Dialog.Root
+          onOpenChange={(e) => {
+            if (!e.open) setImageOpen(false)
+          }}
+          open={isImageOpen}
+        >
           <Dialog.Backdrop bg="rgba(0,0,0,0.8)" />
-          <Dialog.Positioner alignItems="center" display="flex" inset={0} justifyContent="center" position="fixed" zIndex={1400}>
+          <Dialog.Positioner
+            alignItems="center"
+            display="flex"
+            inset={0}
+            justifyContent="center"
+            position="fixed"
+            zIndex={1400}
+          >
             <Dialog.Content bg="transparent" boxShadow="none" p={0}>
               <Flex justify="flex-end" mb={2} w="full">
                 <Box as="button" color="white" onClick={() => setImageOpen(false)}>
@@ -339,7 +368,7 @@ const SelectedPublicationsSection: React.FC = () => {
   const { publications } = useLocalizedData()
   const { colorMode } = useColorMode()
   const isDark = colorMode === 'dark'
-  
+
   const lineBg = isDark ? 'gray.700' : 'gray.200'
   const viewAllColor = isDark ? 'gray.400' : 'gray.500'
 

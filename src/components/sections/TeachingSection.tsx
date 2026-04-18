@@ -1,13 +1,4 @@
-import {
-  Box,
-  Container,
-  Flex,
-  Heading,
-  HStack,
-  Link,
-  Text,
-  VStack
-} from '@chakra-ui/react'
+import { Box, Container, Flex, Heading, HStack, Link, Text, VStack } from '@chakra-ui/react'
 import { useTranslation } from 'react-i18next'
 
 import { useColorModeValue } from '@/hooks/useColorMode'
@@ -65,7 +56,12 @@ const TeachingSection: React.FC = () => {
               <Box flex={1} minW={0}>
                 <Text color={titleColor} fontSize="xs" fontWeight="medium" lineHeight="short">
                   {entry.link ? (
-                    <Link _hover={{ color: 'cyan.400' }} href={entry.link} rel="noopener noreferrer" target="_blank">
+                    <Link
+                      _hover={{ color: 'cyan.400' }}
+                      href={entry.link}
+                      rel="noopener noreferrer"
+                      target="_blank"
+                    >
                       {entry.course}
                     </Link>
                   ) : (

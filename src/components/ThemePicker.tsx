@@ -46,7 +46,7 @@ export const ThemePicker: React.FC = () => {
       >
         <FaPalette />
       </IconButton>
-      
+
       {isOpen && (
         <Box
           bg={menuBg}
@@ -79,7 +79,12 @@ export const ThemePicker: React.FC = () => {
                 transition="background 0.2s"
                 w="full"
               >
-                <Text color={menuText} fontFamily="mono" fontSize="xs" fontWeight={currentThemeKey === key ? 'bold' : 'normal'}>
+                <Text
+                  color={menuText}
+                  fontFamily="mono"
+                  fontSize="xs"
+                  fontWeight={currentThemeKey === key ? 'bold' : 'normal'}
+                >
                   {themes[key].name}
                 </Text>
                 {currentThemeKey === key && <FaCheck color={tc.success} size={10} />}
