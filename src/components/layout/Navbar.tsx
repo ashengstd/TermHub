@@ -186,14 +186,13 @@ const Navbar: React.FC = () => {
 
             <div className="flex items-center gap-2 mt-4 pb-4">
               <Button
-                className="flex-1 border-[var(--border-color)] text-[var(--text-color)]"
+                className="flex-1 h-10 border-[var(--border-color)] text-[var(--text-color)]"
                 onClick={toggleLanguage}
-                size="sm"
                 variant="outline"
               >
                 {currentLang === 'zh' ? 'English' : '中文'}
               </Button>
-              <div className="flex-1 flex justify-center border border-[var(--border-color)] rounded-md py-1">
+              <div className="flex-1 h-10 flex items-center justify-center border border-[var(--border-color)] rounded-md">
                 <ThemePicker />
               </div>
             </div>
