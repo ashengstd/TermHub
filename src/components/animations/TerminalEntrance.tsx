@@ -22,16 +22,16 @@ export const TerminalEntrance: React.FC<TerminalEntranceProps> = ({ children, pa
       current++
       if (current > fullCommand.length) {
         clearInterval(interval)
-        setTimeout(() => setPhase('loading'), 300)
+        setTimeout(() => setPhase('loading'), 150)
       }
-    }, 40)
+    }, 20)
 
     return () => clearInterval(interval)
   }, [fullCommand])
 
   useEffect(() => {
     if (phase === 'loading') {
-      setTimeout(() => setPhase('content'), 800)
+      setTimeout(() => setPhase('content'), 400)
     }
   }, [phase])
 
@@ -87,7 +87,7 @@ export const TerminalEntrance: React.FC<TerminalEntranceProps> = ({ children, pa
                 animate={{ width: '100%' }}
                 className="h-full bg-[var(--accent-color)]"
                 initial={{ width: '0%' }}
-                transition={{ duration: 0.6 }}
+                transition={{ duration: 0.3 }}
               />
             </div>
           </motion.div>

@@ -4,11 +4,13 @@ import React, { useEffect, useRef, useState } from 'react'
 import { MotionHover } from '@/components/animations/MotionList'
 import { Button } from '@/components/ui/button'
 import { useColorMode } from '@/hooks/useColorMode'
+import { useT } from '@/hooks/useT'
 import { type ThemeKey, themes, useThemeContext } from '@/themes/hooks'
 
-export const ThemePicker: React.FC = () => {
+export const ThemePicker: React.FC<{ showLabel?: boolean }> = ({ showLabel }) => {
   const { activeTheme, currentThemeKey, setTheme } = useThemeContext()
   const { colorMode } = useColorMode()
+  const { t } = useT()
   const isDark = colorMode === 'dark'
 
   const iconColor = isDark ? 'rgb(156, 163, 175)' : 'rgb(75, 85, 99)' // gray-400 : gray-600
@@ -40,16 +42,19 @@ export const ThemePicker: React.FC = () => {
     <div className="inline-flex relative" ref={menuRef}>
       <Button
         aria-label="Select Theme"
-        className="transition-colors duration-200 hover:text-[var(--accent-color)] hover:bg-transparent"
+        className="flex items-center gap-2 transition-colors duration-200 hover:text-[var(--accent-color)] hover:bg-transparent"
         onClick={() => setIsOpen(!isOpen)}
         onMouseEnter={(e) => (e.currentTarget.style.color = iconHoverColor)}
         onMouseLeave={(e) => (e.currentTarget.style.color = iconColor)}
-        size="icon"
+        size={showLabel ? 'sm' : 'icon'}
         style={{ color: iconColor }}
         variant="ghost"
       >
-        <MotionHover>
+        <MotionHover className="flex items-center gap-1.5">
           <Palette className="h-4 w-4" />
+          {showLabel && (
+            <span className="text-xs font-medium uppercase tracking-wider">{t('nav_theme')}</span>
+          )}
         </MotionHover>
       </Button>
 

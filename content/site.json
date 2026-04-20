@@ -9,7 +9,6 @@
   "name": {
     "full": "Sheng Ren",
     "first": "Sheng",
-    "nickname": "Ascka",
     "last": "Ren",
     "display": "Sheng Ren",
     "authorVariants": ["Sheng Ren"]
@@ -26,7 +25,15 @@
       "learn new things",
       "try to be a better me"
     ],
-    "skills": ["Python", "Transformers", "VeRL", "Agent", "Rust", "Linux", "Flutter"],
+    "skills": [
+      { "name": "Python", "category": "Programming", "icon": "FaCode" },
+      { "name": "Rust", "category": "Programming", "icon": "FaCode" },
+      { "name": "Flutter", "category": "Programming", "icon": "FaCode" },
+      { "name": "Transformers", "category": "AI Research", "icon": "FaBrain" },
+      { "name": "VeRL", "category": "AI Research", "icon": "FaSync" },
+      { "name": "Agent", "category": "AI Research", "icon": "FaUser" },
+      { "name": "Linux", "category": "Infrastructure", "icon": "FaCodeBranch" }
+    ],
     "timezone": "Asia/Shanghai"
   },
   "contact": {
@@ -39,34 +46,14 @@
     "github": "https://github.com/asckaya",
     "linkedin": "https://www.linkedin.cn/incareer/in/%E7%AC%99-%E4%BB%BB-b64651403/",
     "medium": "",
-    "googleScholar": "https://scholar.google.com/citations?user=Tg0bKZoAAAAJ",
-    "twitter": "",
-    "youtube": "",
-    "bilibili": "",
-    "zhihu": "",
-    "csdn": "",
-    "blog": ""
+    "googleScholar": "https://scholar.google.com/citations?user=Tg0bKZoAAAAJ"
   },
-
-  "pets": [
-    {
-      "name": "Lucas (Lulu)",
-      "emoji": "🐱",
-      "image": "/images/lulu.jpg",
-      "title": "Best Buddy & Little Brother",
-      "description": "Cookie's Ragdoll cat brother. They nap together, chase each other around the house, and share the sunny spot by the window."
-    }
-  ],
-
   "features": {
     "publications": true,
     "projects": true,
-    "articles": false,
     "experience": true,
     "about": true,
-    "news": false,
-    "pets": false,
-    "guide": false
+    "articles": false
   },
   "heroSocialIcons": [
     {
@@ -88,9 +75,10 @@
       "color": "#4285F4"
     }
   ],
-  "selectedPublicationIds": [],
+  "selectedPublicationIds": ["arxiv2026-compress-explore", "ieee2025-vehicle-detection"],
   "sections": [
     "hero",
+    "mentorship",
     "newsDisplay",
     "selectedPublications",
     "talks",

@@ -227,7 +227,7 @@ const PublicationsTerminal: React.FC = () => {
                   <span style={{ color: tc.param }}>{stats.withCode.toString()} open-source</span>
                 </div>
                 <div className="flex-shrink-0" style={{ color: tc.command }}>
-                  ~/papers
+                  ~/publications
                 </div>
               </>
             }

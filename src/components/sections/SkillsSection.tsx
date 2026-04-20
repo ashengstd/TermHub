@@ -3,12 +3,10 @@ import React from 'react'
 import DynamicIcon from '@/components/ui/DynamicIcon'
 import { useColorMode } from '@/hooks/useColorMode'
 import { useLocalizedData } from '@/hooks/useLocalizedData'
-import { useT } from '@/hooks/useT'
 
 type SkillItem = string | { category?: string; icon?: string; name: string }
 
 const SkillsSection: React.FC = () => {
-  const { t } = useT()
   const { siteOwner } = useLocalizedData()
   const skills = siteOwner.skills as SkillItem[]
   const { colorMode } = useColorMode()
@@ -24,31 +22,55 @@ const SkillsSection: React.FC = () => {
   if (skills.length === 0) return null
 
   const getName = (s: SkillItem) => (typeof s === 'string' ? s : s.name)
-  const getIcon = (s: SkillItem) => (typeof s === 'string' ? undefined : s.icon)
+  const getIcon = (s: SkillItem) => (typeof s === 'object' ? s.icon : undefined)
+  const getCategory = (s: SkillItem) =>
+    typeof s === 'object' ? (s.category ?? 'Others') : 'Others'
+
+  const groups = skills.reduce<Record<string, SkillItem[] | undefined>>((acc, s) => {
+    const cat = getCategory(s)
+    acc[cat] ??= []
+    acc[cat].push(s)
+    return acc
+  }, {}) as Record<string, SkillItem[]>
 
   return (
     <section className="w-full">
       <div className="max-w-full lg:max-w-7xl px-2 md:px-4 lg:px-8 mx-auto">
-        <div className="flex items-center gap-3 mb-4">
-          <div className="bg-cyan-400 rounded-full flex-shrink-0 h-0.5 w-5" />
-          <h3 className="text-base md:text-lg font-semibold">{t('about.skills')}</h3>
-          <div className="flex-1 h-px" style={{ backgroundColor: tc.line }} />
-        </div>
-        <div className="flex flex-wrap gap-2">
-          {skills.map((skill) => (
-            <div
-              className="inline-flex items-center rounded-sm font-mono text-xs gap-1.5 px-2.5 py-1"
-              key={getName(skill)}
-              style={{ backgroundColor: tc.tagBg, color: tc.tagColor }}
-            >
-              {(() => {
-                const iconName = getIcon(skill)
-                if (!iconName) return null
-                return (
-                  <DynamicIcon className="h-3 w-3" name={iconName} style={{ color: tc.icon }} />
-                )
-              })()}
-              <span>{getName(skill)}</span>
+        <div className="flex flex-col gap-6">
+          {Object.entries(groups).map(([category, items]) => (
+            <div key={category}>
+              <div className="flex items-center gap-3 mb-3">
+                <div className="bg-cyan-400 rounded-full flex-shrink-0 h-0.5 w-3" />
+                <h4
+                  className="text-xs font-mono font-semibold uppercase tracking-wider"
+                  style={{ color: tc.tagColor }}
+                >
+                  {category}
+                </h4>
+                <div className="flex-1 h-px opacity-10" style={{ backgroundColor: tc.line }} />
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {items.map((skill) => (
+                  <div
+                    className="inline-flex items-center rounded-sm font-mono text-[11px] gap-1.5 px-2 py-1 transition-colors hover:bg-cyan-400/10 group"
+                    key={getName(skill)}
+                    style={{ backgroundColor: tc.tagBg, color: tc.tagColor }}
+                  >
+                    {(() => {
+                      const iconName = getIcon(skill)
+                      if (!iconName) return null
+                      return (
+                        <DynamicIcon
+                          className="h-3 w-3"
+                          name={iconName}
+                          style={{ color: tc.icon }}
+                        />
+                      )
+                    })()}
+                    <span>{getName(skill)}</span>
+                  </div>
+                ))}
+              </div>
             </div>
           ))}
         </div>

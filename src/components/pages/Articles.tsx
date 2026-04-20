@@ -144,7 +144,7 @@ const Articles: React.FC = () => {
       style={{ backgroundColor: isDark ? '#111827' : '#f9fafb' }}
     >
       <div className="flex flex-col gap-6 max-w-[1400px] mx-auto px-2 md:px-4 lg:px-8">
-        <TerminalEntrance path="blog">
+        <TerminalEntrance path="articles">
           <TerminalShell
             bodyClassName="p-0"
             headerRight={formattedTime}
@@ -157,7 +157,7 @@ const Articles: React.FC = () => {
                 <MotionBox delay={0.6}>
                   <div className="flex items-center gap-1">
                     <span style={{ color: tc.prompt }}>
-                      {siteOwner.terminalUsername}@blog:{promptPath}$
+                      {siteOwner.terminalUsername}@articles:{promptPath}$
                     </span>
                     <div
                       className="w-1.5 h-3 animate-pulse"
@@ -199,7 +199,7 @@ const Articles: React.FC = () => {
                   </span>
                 </div>
                 <div className="flex-shrink-0" style={{ color: tc.info }}>
-                  ~/blog
+                  ~/articles
                 </div>
               </>
             }
@@ -211,7 +211,7 @@ const Articles: React.FC = () => {
             >
               <div className="flex items-center gap-2 flex-1 text-xs font-mono">
                 <span className="flex-shrink-0" style={{ color: tc.prompt }}>
-                  {siteOwner.terminalUsername}@blog:{promptPath}$
+                  {siteOwner.terminalUsername}@articles:{promptPath}$
                 </span>
                 <input
                   className="flex-1 bg-transparent border-none outline-none focus:ring-0 p-0 text-xs font-mono placeholder:opacity-50"

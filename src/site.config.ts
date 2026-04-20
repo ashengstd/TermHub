@@ -72,13 +72,6 @@ export function getLocalizedSiteOwner(lang: string) {
       location: contact.location,
     },
     name: cfg.name,
-    pets: (cfg.pets ?? []).map((p) => ({
-      description: p.description ?? '',
-      emoji: p.emoji ?? '',
-      image: p.image ?? '',
-      name: p.name,
-      title: p.title ?? '',
-    })),
     rotatingSubtitles: terminal.rotatingSubtitles ?? [],
     skills: terminal.skills ?? [],
     social: social,

@@ -1,5 +1,5 @@
 import { Link } from '@tanstack/react-router'
-import { Menu, Moon, Sun, X } from 'lucide-react'
+import { Languages, Menu, Moon, Sun, X } from 'lucide-react'
 import React, { useState } from 'react'
 import { FaGithub, FaLinkedin, FaMailBulk } from 'react-icons/fa'
 import { SiGooglescholar, SiMedium } from 'react-icons/si'
@@ -117,12 +117,14 @@ const Navbar: React.FC = () => {
             <div className="flex items-center gap-1 border-l border-[var(--border-color)] pl-2 md:pl-4">
               <Button
                 aria-label={t('aria.toggleLanguage')}
-                className="hidden sm:flex px-2 text-[var(--text-color)] text-xs font-medium transition-all duration-200 hover:text-[var(--accent-color)] hover:bg-transparent"
+                className="hidden sm:flex items-center text-[var(--text-color)] transition-all duration-200 hover:text-[var(--accent-color)] hover:bg-transparent"
                 onClick={toggleLanguage}
-                size="sm"
+                size="icon"
                 variant="ghost"
               >
-                <MotionHover>{currentLang === 'zh' ? 'EN' : '中'}</MotionHover>
+                <MotionHover>
+                  <Languages className="h-5 w-5" />
+                </MotionHover>
               </Button>
 
               <ThemePicker />
@@ -186,11 +188,11 @@ const Navbar: React.FC = () => {
 
             <div className="flex items-center gap-2 mt-4 pb-4">
               <Button
-                className="flex-1 h-10 border-[var(--border-color)] text-[var(--text-color)]"
+                className="flex-1 h-10 flex items-center justify-center border-[var(--border-color)] text-[var(--text-color)]"
                 onClick={toggleLanguage}
                 variant="outline"
               >
-                {currentLang === 'zh' ? 'English' : '中文'}
+                <Languages className="h-5 w-5" />
               </Button>
               <div className="flex-1 h-10 flex items-center justify-center border border-[var(--border-color)] rounded-md">
                 <ThemePicker />

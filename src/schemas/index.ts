@@ -302,19 +302,8 @@ export const SiteConfigSchema = z.object({
     first: z.string(),
     full: z.string(),
     last: z.string(),
-    nickname: z.string().optional(),
   }),
-  pets: z
-    .array(
-      z.object({
-        description: z.string().optional(),
-        emoji: z.string().optional(),
-        image: z.string().optional(),
-        name: z.string(),
-        title: z.string().optional(),
-      }),
-    )
-    .optional(),
+  sections: z.array(z.string()).optional(),
   selectedPublicationIds: z.array(z.string()).optional(),
   social: z.record(z.string(), z.string()).optional(),
   tagline: z.string().optional(),
@@ -323,7 +312,7 @@ export const SiteConfigSchema = z.object({
       hostname: z.string().optional(),
       prompt: z.string().optional(),
       rotatingSubtitles: z.array(z.string()).optional(),
-      skills: z.array(z.string()).optional(),
+      skills: z.array(z.union([z.string(), SkillSchema])).optional(),
       timezone: z.string().optional(),
       username: z.string().optional(),
     })

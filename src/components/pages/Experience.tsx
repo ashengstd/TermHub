@@ -156,7 +156,8 @@ const Experience: React.FC = () => {
     const out = (lines: string[]) => setCmdOutput(lines)
     switch (parts[0]) {
       case 'cat':
-        if (parts[1] === 'skills') out([siteOwner.skills.join(' · ')])
+        if (parts[1] === 'skills')
+          out([siteOwner.skills.map((s) => (typeof s === 'string' ? s : s.name)).join(' · ')])
         else out([`cat: ${parts[1] || ''}: not found`])
         break
       case 'clear':
@@ -196,7 +197,7 @@ const Experience: React.FC = () => {
   return (
     <div className="py-8 w-full">
       <div className="flex flex-col gap-6 max-w-[1400px] mx-auto px-2 md:px-4 lg:px-8">
-        <TerminalEntrance path="career">
+        <TerminalEntrance path="experience">
           <TerminalShell
             bodyClassName="p-0"
             headerRight={
@@ -255,7 +256,7 @@ const Experience: React.FC = () => {
                   </span>
                 </div>
                 <div className="flex-shrink-0" style={{ color: tc.command }}>
-                  ~/career
+                  ~/experience
                 </div>
               </div>
             }

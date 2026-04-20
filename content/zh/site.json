@@ -6,61 +6,50 @@
     "authorName": "Ascka",
     "authorLink": "https://github.com/asckaya"
   },
-
   "name": {
     "full": "任笙",
     "first": "笙",
-    "nickname": "Ascka",
     "last": "任",
     "display": "任笙",
     "authorVariants": ["任笙"]
   },
-
   "tagline": "大模型与多智能体研究 | Linux 玩家",
   "avatar": "avatar.jpeg",
-
   "terminal": {
     "username": "ascka",
     "hostname": "hello",
     "prompt": "$",
     "rotatingSubtitles": ["想做Linux极客", "和LLM玩耍", "学习新东西", "努力成为更好的自己"],
-    "skills": ["Python", "Transformers", "VeRL", "Agent", "Rust", "Linux", "Flutter"],
+    "skills": [
+      { "name": "Python", "category": "编程语言", "icon": "FaCode" },
+      { "name": "Rust", "category": "编程语言", "icon": "FaCode" },
+      { "name": "Flutter", "category": "编程语言", "icon": "FaCode" },
+      { "name": "Transformers", "category": "人工智能", "icon": "FaBrain" },
+      { "name": "VeRL", "category": "人工智能", "icon": "FaSync" },
+      { "name": "Agent", "category": "人工智能", "icon": "FaUser" },
+      { "name": "Linux", "category": "基础设施", "icon": "FaCodeBranch" }
+    ],
     "timezone": "Asia/Shanghai"
   },
-
   "contact": {
     "email": "rensheng0410@gmail.com",
     "academicEmail": "rensheng@nuaa.edu.cn",
     "hiringEmail": "rensheng0410@outlook.com",
     "location": "中国江苏南京"
   },
-
   "social": {
     "github": "https://github.com/ashengstd",
     "linkedin": "https://www.linkedin.cn/incareer/in/%E7%AC%99-%E4%BB%BB-b64651403/",
     "medium": "",
-    "googleScholar": "https://scholar.google.com/citations?user=Tg0bKZoAAAAJ",
-    "twitter": "",
-    "youtube": "",
-    "bilibili": "",
-    "zhihu": "",
-    "csdn": "",
-    "blog": ""
+    "googleScholar": "https://scholar.google.com/citations?user=Tg0bKZoAAAAJ"
   },
-
-  "pets": [],
-
   "features": {
     "publications": true,
     "projects": true,
-    "articles": false,
     "experience": true,
     "about": true,
-    "news": false,
-    "pets": false,
-    "guide": false
+    "articles": false
   },
-
   "heroSocialIcons": [
     {
       "platform": "github",
@@ -81,10 +70,10 @@
       "color": "#4285F4"
     }
   ],
-
-  "selectedPublicationIds": [],
+  "selectedPublicationIds": ["arxiv2026-compress-explore", "ieee2025-vehicle-detection"],
   "sections": [
     "hero",
+    "mentorship",
     "newsDisplay",
     "selectedPublications",
     "talks",

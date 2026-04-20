@@ -93,9 +93,13 @@ const HOVER_SCALE = { scale: 1.05, translateY: -2 } as const
 const TAP_SCALE = { scale: 0.95 } as const
 const HOVER_STYLE = { display: 'inline-block' } as const
 
-export const MotionHover: React.FC<{ children: ReactNode }> = ({ children }) => {
+export const MotionHover: React.FC<{ children: ReactNode; className?: string }> = ({
+  children,
+  className,
+}) => {
   return (
     <m.div
+      className={className}
       style={HOVER_STYLE}
       transition={HOVER_TRANSITION}
       whileHover={HOVER_SCALE}
