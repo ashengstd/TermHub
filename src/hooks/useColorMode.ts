@@ -1,4 +1,4 @@
-import { useTheme } from 'next-themes'
+import { useTheme } from '@wrksz/themes/client'
 
 export type ColorMode = 'dark' | 'light'
 

@@ -149,7 +149,7 @@ const Navbar: React.FC = () => {
 
       {/* Mobile Drawer */}
       {isOpen && (
-        <div className="lg:hidden mt-3 px-4 border-t border-[var(--border-color)] pt-4 animate-in slide-in-from-top-2">
+        <div className="lg:hidden mt-3 px-4 border-t border-[var(--border-color)] pt-4 animate-fade-in-down animate-duration-300">
           <div className="flex flex-col items-stretch gap-2 bg-[var(--bg-color)]">
             {navItems.map((item) => (
               <Link

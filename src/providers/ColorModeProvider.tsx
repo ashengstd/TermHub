@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 
-import { ThemeProvider } from 'next-themes'
+import { ThemeProvider } from '@wrksz/themes'
 
 export function ColorModeProvider({ children }: { children: ReactNode }) {
   return (

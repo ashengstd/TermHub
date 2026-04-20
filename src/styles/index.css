@@ -2,6 +2,7 @@
 @import url('https://cdn.jsdelivr.net/npm/@chinese-fonts/maple-mono-cn/dist/MapleMono-CN-Regular/result.css');
 @import url('https://cdn.jsdelivr.net/npm/@chinese-fonts/maple-mono-cn/dist/MapleMono-CN-Bold/result.css');
 @import 'tailwindcss';
+@import 'tailwind-animations';
 
 @source "../**/*.{ts,tsx}";
 
@@ -107,8 +108,6 @@
     color: #bf616a;
   }
 }
-
-@plugin "tailwindcss-animate";
 
 /* -------------------------------------------------------------------------- */
 /* 2. BASE STYLES (Global Typography & Reset)                                 */
